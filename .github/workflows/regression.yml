@@ -1,0 +1,186 @@
+#* 🧙🏻‍♂️BIENVENIDO A LOS PIPELINES DE CONTINUOUS INTEGRATION DE "ARI - Hija de Aurora"!
+#? 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "MAIN",
+#? 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
+#! 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
+name: 🧪Pipeline Regression in QA
+run-name: ${{github.actor}}👨🏻‍🔬 triggered Regression in ${{github.ref_name}}
+
+on:
+  push:
+    branches:
+    - QA
+
+jobs:
+  RegressionTesting:
+    name: regression
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: ['chrome', 'firefox', 'edge', 'iphone'] #? Runs tests in 4 different browsers
+
+    steps:
+
+    - name: 📘 Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: 💿 Installing Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: 🍙 Bun Setup
+      uses: oven-sh/setup-bun@v1
+
+    - name: 🧬 Install Project Dependencies
+      run: |
+        bun install
+
+    - name: 🎭️ Installing Playwright And Browsers
+      run: |
+        bun run pw:install
+
+    - name: 🎭️ Playwright Regression Test on ${{ matrix.browser }}
+      run: |
+        bun run regression:${{ matrix.browser }}
+      env:
+        TRELLO_ENV_CI_BASEURL: ${{secrets.TRELLO_ENV_CI_BASEURL}}
+        TRELLO_API_CI_KEY: ${{secrets.TRELLO_API_CI_KEY}}
+        TRELLO_API_CI_TOKEN: ${{secrets.TRELLO_API_CI_TOKEN}}
+
+    - name: 📊Generate Allure Report for ${{ matrix.browser }}
+      if: always()
+      run: |
+        bun run allure:gen:${{ matrix.browser }}
+
+    - name: 📡Upload Artifact - Allure Report for ${{ matrix.browser }}
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: allure-${{ matrix.browser }}-report
+        path: allure-report/${{ matrix.browser }}
+        retention-days: 15
+
+    - name: 📡Upload Artifact - Test Reports for ${{ matrix.browser }}
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: html-${{ matrix.browser }}-report
+        path: test-html-report/${{ matrix.browser }}
+        retention-days: 15
+
+    - name: 📦️ Set testExecKey for Jira XRay
+      if: always()
+      id: setTestExecKey
+      run: |
+        if [[ "${{ matrix.browser }}" == "chrome" ]]; then
+          echo "TXID=GX3-1533" >> $GITHUB_OUTPUT
+        elif [[ "${{ matrix.browser }}" == "firefox" ]]; then
+          echo "TXID=GX3-1685" >> $GITHUB_OUTPUT
+        elif [[ "${{ matrix.browser }}" == "edge" ]]; then
+          echo "TXID=GX3-1686" >> $GITHUB_OUTPUT
+        elif [[ "${{ matrix.browser }}" == "iphone" ]]; then
+          echo "TXID=GX3-1687" >> $GITHUB_OUTPUT
+        fi
+
+    - name: ✅Check if XRAY_CLIENT is Defined
+      if: always()
+      run: |
+        if [[ -z "${{ secrets.XRAY_CLIENT_ID }}" ]]; then
+          echo "XRAY_CLIENT_ID is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+        if [[ -z "${{ secrets.XRAY_CLIENT_SECRET }}" ]]; then
+          echo "XRAY_CLIENT_SECRET is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+
+    - name: ✅Import Test Results to Xray TX -- ${{ env.TXID }} (${{ matrix.browser }})
+      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
+      uses: mikepenz/xray-action@v3
+      with:
+        username: ${{secrets.XRAY_CLIENT_ID}}
+        password: ${{secrets.XRAY_CLIENT_SECRET}}
+        testFormat: 'junit'
+        testPaths: 'test-junit-report/${{ matrix.browser }}-importer-report.xml'
+        testExecKey: ${{ env.TXID }} #* Este debería ser el TX predeterminado para este Pipeline de Regresión.
+        projectKey: 'GX3'
+      env:
+        TXID: ${{ steps.setTestExecKey.outputs.TXID }}
+        XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
+        XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+
+  Ari-Slack-Notification:
+    needs: [RegressionTesting]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🔔Check if SLACK_WEBHOOK is Defined
+      run: |
+        if [[ -z "${{ secrets.SLACK_WEBHOOK }}" ]]; then
+          echo "SLACK_WEBHOOK is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+
+    - name: 🔔Slack Notification of Done
+      if: always()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Ari✨
+        SLACK_MESSAGE: ':test_tube: PLAYWRIGHT: REGRESSION RESULTS IMPORTED TO JIRA :rocket:'
+        SLACK_COLOR: ${{ needs.RegressionTesting.result }}
+        SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
+
+  Create-PullRequest:
+    needs: [RegressionTesting, Ari-Slack-Notification]
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: 💻Checkout
+      uses: actions/checkout@v4
+
+    - name: 🧬 Check for changes (git diff main)
+      id: gitDiff
+      run: |
+        git fetch origin main
+        DIFF=$(git diff --name-only origin/main)
+        if [ "$DIFF" != "" ]; then
+          echo "changes=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: 📦️ Create Pull Request
+      if: steps.gitDiff.outputs.changes == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { repo, owner } = context.repo;
+          const result = await github.rest.pulls.create({
+          title: '✅[QA REGRESSION PASSED]: Ready to Merge into MAIN',
+          owner,
+          repo,
+          head: '${{ github.ref_name }}',
+          base: 'main',
+          body: [
+              'Update branch by Automation Pipeline:',
+              '- (CI) Last Story Test Execution PASSED✅',
+              '- (CI) Regression Test Execution PASSED✅',
+              '🆗No Conflicts in Repo Source Branch'
+          ].join('\n')
+          });
+          github.rest.issues.addLabels({
+          owner,
+          repo,
+          issue_number: result.data.number,
+          labels: ['autoPullRequest']
+          });
+
+  AutoMerge-into-Main:
+    needs: [Create-PullRequest]
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🧬Merge QA -> MAIN
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        label_name: 'autoPullRequest'
+        target_branch: 'main' #RAMA PRINCIPAL DEL REPOSITORIO PRESENTE
+        github_token: ${{ github.token }}
