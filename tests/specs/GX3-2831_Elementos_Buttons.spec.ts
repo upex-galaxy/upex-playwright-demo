@@ -28,5 +28,15 @@ test.describe('GX3-2831',()=>{
 	})
 	});
 
-	
+	test('TC3:Validar hacer click en el boton con id dinamico',async({page})=>{
+		await test.step('tc3',async()=>{
+			await page.goto('https://demoqa.com/buttons');
+		});
+
+		await test.step('Deberia visualizarse el mensaje "You have done a dynamic click"',async()=>{
+			await page.getByText('Click Me', { exact: true }).click();
+			//validacion
+			await expect(page.getByText("You have done a dynamic click")).toBeVisible();
+	})
+	});
 });
