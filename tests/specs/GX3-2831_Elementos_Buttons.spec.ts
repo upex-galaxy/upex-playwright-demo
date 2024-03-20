@@ -30,7 +30,7 @@ test.describe('GX3-2831 | TS: ⚡️ToolsQA | Elements | Buttons',()=>{
 	})
 	});
 
-	/*test('TC3:Validar hacer click en el boton con id dinamico',async({page})=>{
+	test('TC3:Validar hacer click en el boton con id dinamico',async({page})=>{
 		await test.step('tc3',async()=>{
 			await page.goto('https://demoqa.com/buttons');
 		});
@@ -41,5 +41,5 @@ test.describe('GX3-2831 | TS: ⚡️ToolsQA | Elements | Buttons',()=>{
 			await expect(page.getByText("You have done a dynamic click")).toBeVisible();
 	})
 	});
-	*/
+	
 });
