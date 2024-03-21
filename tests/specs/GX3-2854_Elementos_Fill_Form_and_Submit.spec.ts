@@ -10,10 +10,38 @@ test.describe('GX3-2854 ',()=>{
 
 	test('TC1',async({page})=>{
 		const usernameInput = page.locator('#userName-wrapper input');
-
-		await test.step('debeia completarse el campo', async () => {
+		const emailInput= page.locator('#userEmail-wrapper input');
+		const currentAdInput= page.locator('#currentAddress-wrapper textarea');
+		const permanentAdInput= page.locator('#permanentAddress-wrapper textarea');
+		const submitButton= page.locator('button',{hasText:'Submit'});
+		
+		
+		await test.step('deberia completarse el campo fullname', async () => {
 			await usernameInput.fill(data[0].fullName);
 		});
+
+		await test.step('debería completarse el campo email', async () => {
+			await emailInput.fill(data[0].email);
+		});
+
+		await test.step('deberia completarse el campo currentAddress', async () => {
+			await currentAdInput.fill(data[0].currentAddress);
+		});
+
+		await test.step('deberia completarse el campo permanentAddress', async () => {
+			await permanentAdInput.fill(data[0].permanentAddress);
+		});
+
+		await test.step('enviar formulario', async () => {
+			await submitButton.click();
+			
+		});
+
+		
+		
+		
+		
+		
 		
 	});
 
