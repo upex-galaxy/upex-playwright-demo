@@ -64,7 +64,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-2838' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-2854' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
