@@ -12,7 +12,7 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['GX3-2854-tools-qa-elements-text-box-fill-form-and-submit'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-2854-⚡️-tools-qa-elements-text-box-fill-form-and-submit'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
