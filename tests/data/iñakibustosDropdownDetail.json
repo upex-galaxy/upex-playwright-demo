@@ -1,0 +1,58 @@
+{
+"selectValue":
+[
+	{
+		"opcion1":"Group 1, option 1",
+		"opcion2":"Group 1, option 2",
+		"opcion3":"Group 2, option 1",
+		"opcion4":"Group 2, option 2",
+		"opcion5":"A root option",
+		"opcion6":"Another root option"
+	}
+],
+"selectOne": [
+	{
+		"opcion1":"Dr.",
+		"opcion2":"Mr.",
+		"opcion3":"Mrs.",
+		"opcion4":"Ms.",
+		"opcion5":"Prof.",
+		"opcion6":"Other"
+	}
+],
+"oldStyleSelect": [
+	{
+		"opcion1":"Red",
+		"opcion2":"Blue",
+		"opcion3":"Green",
+		"opcion4":"Yellow",
+		"opcion5":"Purple",
+		"opcion6":"Black",
+		"opcion7":"White",
+		"opcion8":"Violet",
+		"opcion9":"Indigo",
+		"opcion10":"Magenta",
+		"opcion11":"Aqua"
+	}
+],
+"multiselectDrop":[
+	{
+		"opcion1":"Green",
+		"opcion2":"Blue",
+		"opcion3":"Black",
+		"opcion4":"Red"
+	}
+],
+"standardMultiSelect":[
+	{
+		"opcion1":"Volvo",
+		"opcion2":"Saab",
+		"opcion3":"Opel",
+		"opcion4":"Audi"
+	}
+]
+
+
+
+}
+

@@ -1,23 +1,32 @@
 import{test,Page} from '@playwright/test';
+import { DropPom } from '@pages/iñakibustosGX3-2907';
 
 
 test.describe('prueba para ver si se rompe algo:', async ()=>{
-	test('ir a la page', async({page}) => {
-		await page.goto('https://demoqa.com/select-menu');
-
-		await test.step('', async () => {
-		await page.frameLocator('placeholder').getByRole('button', { name: 'Select Option' }).click();
-	})
+	test.beforeEach(async({page})=>{
+		await page.goto("https://demoqa.com/select-menu");
+		
 	});
 	
+	test('ir a la page', async({page}) => {
+		const openSelectValue = page.locator('div').filter({ hasText: /^Select Option$/ }).nth(1);
+		const dropPom = new DropPom(page);
+
+
+		await test.step('seleccionar el dropdown', async () => {
+		await openSelectValue.click();
+		await dropPom.clickRandomOptions();
+
+
+		
+	});
 
 	
-	/*test('TC1:abrir el primer dropdown a ver que pasa', async({page})=>{
-		await page. page.frameLocator('placeholder').getByRole('button', { name: 'Select Option' }).click();
-	})
-	});*/
-	
-	
-	
 
+	});
+
+	
+	
 });
+	
+
