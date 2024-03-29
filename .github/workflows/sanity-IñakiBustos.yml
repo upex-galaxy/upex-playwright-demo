@@ -40,7 +40,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        bun run test: tests/specs/GX3-2865_Tools-qa-interactions-selectable.spec.ts
+        bun run test: tests/specs/elements/GX3-2865_Tools-qa-interactions-selectable.spec.ts
 
     - name: 📊Generate Allure Report
       run: |
