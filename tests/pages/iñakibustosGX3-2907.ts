@@ -16,19 +16,10 @@ export class DropPom{
 	selectOne4:()=>Locator;
 	selectOne5:()=>Locator;
 	selectOne6:()=>Locator;
-/*
+
 	oldStyleSelect1:()=>Locator;
-	oldStyleSelect2:()=>Locator;
-	oldStyleSelect3:()=>Locator;
-	oldStyleSelect4:()=>Locator;
-	oldStyleSelect5:()=>Locator;
-	oldStyleSelect6:()=>Locator;
-	oldStyleSelect7:()=>Locator;
-	oldStyleSelect8:()=>Locator;
-	oldStyleSelect9:()=>Locator;
-	oldStyleSelect10:()=>Locator;
-	oldStyleSelect11:()=>Locator;
-*/
+	
+
 	multiSelectDrop1:()=>Locator;
 	multiSelectDrop2:()=>Locator;
 	multiSelectDrop3:()=>Locator;
@@ -60,20 +51,11 @@ export class DropPom{
 		this.selectOne5= ()=> this.page.getByText('Prof.', { exact: true });
 		this.selectOne6= ()=> this.page.getByText('Other', { exact: true });
 
-//preguntar como se buscan esos locators 
-/*
-		this.oldStyleSelect1=
-		this.oldStyleSelect2=
-		this.oldStyleSelect3=
-		this.oldStyleSelect4=
-		this.oldStyleSelect5=
-		this.oldStyleSelect6=
-		this.oldStyleSelect7=
-		this.oldStyleSelect8=
-		this.oldStyleSelect9=
-		this.oldStyleSelect10=
-		this.oldStyleSelect11=
-*/
+ 
+
+		this.oldStyleSelect1= ()=> this.page.locator('#oldSelectMenu');
+
+
 		this.multiSelectDrop1= ()=> this.page.locator('#react-select-4-option-0');
 		this.multiSelectDrop2= ()=> this.page.locator('#react-select-4-option-1');
 		this.multiSelectDrop3= ()=> this.page.locator('#react-select-4-option-2');
@@ -88,9 +70,30 @@ export class DropPom{
 		
 	}
 
-	async clickRandomOptions(){
+	async clickRandomSelectValue(){
 		await this.clickRandomOption(this.selectValue1, this.selectValue2,this.selectValue3,this.selectValue4,this.selectValue5,this.selectValue6);
 	}
+	async clickRandomSelectOne(){
+		await this.clickRandomOption(this.selectOne1, this.selectOne2, this.selectOne3, this.selectOne4, this.selectOne5, this.selectOne6);
+	}
+	async clickMultiSelectDrop(){
+		await this.multiSelectDrop1().click();
+		await this.multiSelectDrop2().click();
+		await this.multiSelectDrop3().click();
+		await this.multiSelectDrop4().click();
+	}
+	async clickRandomStdMultiSelect(){
+		await this.clickRandomOption(this.standardMultiselect1, this.standardMultiselect2, this.standardMultiselect3, this.standardMultiselect4)
+	}
+	
+
+	async clickRandomOldSelect(){
+		await this.oldStyleSelect1().selectOption('5');
+	}
+	
+	
+
+	
 	private async clickRandomOption(...options: (() => Locator)[]) {
     const randomIndex = Math.floor(Math.random() * options.length);
     const randomLocator = options[randomIndex]();
