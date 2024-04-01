@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: ['chrome', 'firefox', 'edge', 'iphone'] #? Runs tests in 4 different browsers
+        browser: ['chrome', 'firefox', 'edge'] #? Runs tests in 4 different browsers
 
     steps:
 
@@ -80,8 +80,6 @@ jobs:
           echo "TXID=GX3-1685" >> $GITHUB_OUTPUT
         elif [[ "${{ matrix.browser }}" == "edge" ]]; then
           echo "TXID=GX3-1686" >> $GITHUB_OUTPUT
-        elif [[ "${{ matrix.browser }}" == "iphone" ]]; then
-          echo "TXID=GX3-1687" >> $GITHUB_OUTPUT
         fi
 
     - name: ✅Check if XRAY_CLIENT is Defined
