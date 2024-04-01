@@ -28,7 +28,7 @@ test.describe('GX3-2865 ToolsQA | Interactions | Selectable',()=>{
 		const listPOM = new ListPOM(page)
 		
 		await test.step('hacer click en "Grid"', async () => {
-			await page.getByRole('tab',{name:'Grid'}).click();
+			await page.locator('a').getByText('Grid').click();
 		});
 		
 		await listPOM.clickLocatorGrid();
