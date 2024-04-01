@@ -5,7 +5,7 @@ import { ListPOM } from '@pages/iñakibustosPOM';
 
 test.describe('GX3-2865 ToolsQA | Interactions | Selectable',()=>{
 	test.beforeEach(async({page})=>{
-		await page.goto("https://demoqa.com/selectable");
+		await page.goto("https://demoqa.com/selectable", { waitUntil: 'domcontentloaded' });
 		
 	});
 
