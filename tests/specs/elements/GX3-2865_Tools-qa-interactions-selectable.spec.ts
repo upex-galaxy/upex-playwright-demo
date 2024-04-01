@@ -32,7 +32,6 @@ test.describe('GX3-2865 ToolsQA | Interactions | Selectable',()=>{
 		});
 		
 		await listPOM.clickLocatorGrid();
-
 		
 		await expect(activeListGrid).toHaveClass(/active/);
 			
