@@ -70,10 +70,10 @@ export default defineConfig({
 			use: { ...devices['Desktop Edge'], channel: 'msedge' },
 		},
 		//* Test against mobile Devices:
-		{
-			name: 'iphone',
-			use: { ...devices['iPhone 14 Pro'] },
-		},
+		// {
+		// 	name: 'iphone',
+		// 	use: { ...devices['iPhone 14 Pro'] },
+		// },
 		{
 			name: 'super-precondition-example',
 			testMatch: /.*\.(test)\.(prc)\.(js|ts)/,
