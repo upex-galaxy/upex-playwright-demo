@@ -12,7 +12,9 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
+
     branches: ['GX3-2907-⚡️-tools-qa-widgets-dropdown-select-menu'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+
 
 jobs:
   TestSuite:
@@ -40,7 +42,10 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        bun run test:ci tests/specs/widgets/GX3-2907_Dropdown-SelectMenu.spec.ts
+
+      bun run test:ci tests/specs/widgets/GX3-2907_Dropdown-SelectMenu.spec.ts
+
+
 
     - name: 📊Generate Allure Report
       run: |
