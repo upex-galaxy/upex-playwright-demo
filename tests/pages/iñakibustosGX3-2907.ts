@@ -30,19 +30,19 @@ export class DropPom{
 	standardMultiselect3:()=>Locator;
 	standardMultiselect4:()=>Locator;
 
-
+//comento los elementos para los TCs con el fin de encontrar el origen del bucle
 
 	constructor (driver:Page){
 		
 		this.page=driver;
 
 		
-		this.selectValue1= ()=> this.page.getByText('Group 1, option 1', { exact: true });
-		this.selectValue2= ()=> this.page.getByText('Group 1, option 2', { exact: true });
-		this.selectValue3= ()=> this.page.getByText('Group 2, option 1', { exact: true });
-		this.selectValue4= ()=> this.page.getByText('Group 2, option 2', { exact: true });
-		this.selectValue5= ()=> this.page.getByText('A root option', { exact: true });
-		this.selectValue6= ()=> this.page.getByText('Another root option', { exact: true });
+		this.selectValue1= ()=> this.page.getByText('Group 1, option 1',{exact:true});
+		this.selectValue2= ()=> this.page.getByText('Group 1, option 2',{exact:true});
+		this.selectValue3= ()=> this.page.getByText('Group 2, option 1',{exact:true});
+		this.selectValue4= ()=> this.page.getByText('Group 2, option 2',{exact:true});
+		this.selectValue5= ()=> this.page.getByText('A root option',{exact:true});
+		this.selectValue6= ()=> this.page.getByText('Another root option',{exact:true});
 		
 		this.selectOne1= ()=> this.page.getByText('Dr.', { exact: true });
 		this.selectOne2= ()=> this.page.getByText('Mr.', { exact: true });
@@ -51,7 +51,7 @@ export class DropPom{
 		this.selectOne5= ()=> this.page.getByText('Prof.', { exact: true });
 		this.selectOne6= ()=> this.page.getByText('Other', { exact: true });
 
- 
+
 
 		this.oldStyleSelect1= ()=> this.page.locator('#oldSelectMenu');
 
@@ -72,6 +72,7 @@ export class DropPom{
 
 	async clickRandomSelectValue(){
 		await this.clickRandomOption(this.selectValue1, this.selectValue2,this.selectValue3,this.selectValue4,this.selectValue5,this.selectValue6);
+		
 	}
 	async clickRandomSelectOne(){
 		await this.clickRandomOption(this.selectOne1, this.selectOne2, this.selectOne3, this.selectOne4, this.selectOne5, this.selectOne6);
@@ -96,8 +97,13 @@ export class DropPom{
 	
 	private async clickRandomOption(...options: (() => Locator)[]) {
     const randomIndex = Math.floor(Math.random() * options.length);
-    const randomLocator = options[randomIndex]();
-    await randomLocator.click();}
+    
+	const randomLocator = options[randomIndex]();
+	await randomLocator.click();
+	
+	
+    
+	}
 
 
 }
