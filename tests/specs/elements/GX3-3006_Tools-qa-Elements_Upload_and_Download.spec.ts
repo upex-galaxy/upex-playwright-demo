@@ -1,19 +1,17 @@
-import {test,expect} from '@playwright/test';
+import { test,expect } from '@playwright/test';
 import { DownloadPage, UploadPage } from '@pages/iñakibustosGX3-3006';
 
 let downloadPage: DownloadPage;
 let uploadPage: UploadPage;
 
-
-test.describe('GX3-3006 | ToolsQA | Elements | Upload and Download',()=>{
-	test.beforeEach(async({page})=>{
+test.describe('GX3-3006 | ToolsQA | Elements | Upload and Download',() => {
+	test.beforeEach(async ({ page }) => {
 		downloadPage = new DownloadPage(page);
 		uploadPage= new UploadPage(page);
-		await page.goto('https://demoqa.com/upload-download',{waitUntil:'domcontentloaded'});
+		await page.goto('https://demoqa.com/upload-download',{ waitUntil:'domcontentloaded' });
 	});
 
-	test('TC1: Validar descargar un archivo desde demoqa', async({page})=>{
-		
+	test('TC1: Validar descargar un archivo desde demoqa', async ({ page }) => {
 		
 		const filePath = await downloadPage.downloadFile();
 
@@ -21,16 +19,12 @@ test.describe('GX3-3006 | ToolsQA | Elements | Upload and Download',()=>{
 
 	});
 
-
-	test('Validar cargar archivos a demoqa', async({page}) => {
-
+	test('TC2: Validar cargar archivos a demoqa', async ({ page }) => {
 		
-		await uploadPage.uploadFiles()
+		await uploadPage.uploadFiles();
 
-		expect(page.getByText('C:\\fakepath\\upexgalaxy.gif',)).toBeVisible() 
+		expect(page.getByText('C:\\fakepath\\upexgalaxy.gif')).toBeVisible(); 
 	
 	});
-		
-	
 
 });

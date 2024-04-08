@@ -1,22 +1,21 @@
-import { Page,Locator } from "@playwright/test";
-
+import type { Page,Locator } from '@playwright/test';
+import path from 'path';
 
 //download
 export class DownloadPage {
 	private page:Page;
 	private downloadBtn: Locator;
-	
 
 	constructor(page) {
-    this.page = page;
-    this.downloadBtn = page.locator('#downloadButton');
+		this.page = page;
+		this.downloadBtn = page.locator('#downloadButton');
 	}
 
 	async downloadFile() {
 		const downloadPromise = this.page.waitForEvent('download');
 		await this.downloadBtn.click();
 		const download = await downloadPromise;
-		const filePath = '/path/to/save/at/' + download.suggestedFilename();
+		const filePath = 'D:/pw_UpexGalaxy/pw_sprint39/upex-playwright-demo/coverage/Downloads' + download.suggestedFilename();
 		await download.saveAs(filePath);
 		return filePath;
 		
@@ -25,24 +24,18 @@ export class DownloadPage {
 }
 //upload
 
-export class UploadPage{
+export class UploadPage {
 	private page:Page;
 	private uploadBtn: Locator;
 
 	constructor(page) {
 		this.page=page;
-		this.uploadBtn = page.locator('input[type="file"]');
-		
+		this.uploadBtn = this.page.locator('label[for="uploadFile"]');
     
 	}
 
 	async uploadFiles() {
-		this.uploadBtn.setInputFiles('D:/pw_UpexGalaxy/pw_sprint39/upex-playwright-demo/tests/data/images/upexgalaxy.gif');
-		
-
-		
-
+		const filePath = path.join('tests/data/images/upexgalaxy.gif');
+		await this.uploadBtn.setInputFiles(filePath);
 	}
 }
-	
-
