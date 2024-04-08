@@ -1,17 +1,20 @@
 import {test,expect} from '@playwright/test';
 import { DownloadPage, UploadPage } from '@pages/iñakibustosGX3-3006';
-import path from 'path';
 
+let downloadPage: DownloadPage;
+let uploadPage: UploadPage;
 
 
 test.describe('GX3-3006 | ToolsQA | Elements | Upload and Download',()=>{
 	test.beforeEach(async({page})=>{
+		downloadPage = new DownloadPage(page);
+		uploadPage= new UploadPage(page);
 		await page.goto('https://demoqa.com/upload-download',{waitUntil:'domcontentloaded'});
 	});
 
-	test('TC1: download image', async({page})=>{
-		const downloadPage = new DownloadPage(page);
-
+	test('TC1: Validar descargar un archivo desde demoqa', async({page})=>{
+		
+		
 		const filePath = await downloadPage.downloadFile();
 
 		expect(filePath).toContain('.jpeg');
@@ -19,13 +22,15 @@ test.describe('GX3-3006 | ToolsQA | Elements | Upload and Download',()=>{
 	});
 
 
-	test('TC2: upload image', async({page}) => {
-
-		const uploadPage = new UploadPage(page);
-		await uploadPage.uploadFile();
-
+	test('Validar cargar archivos a demoqa', async({page}) => {
 
 		
+		await uploadPage.uploadFiles()
+
+		expect(page.getByText('C:\\fakepath\\upexgalaxy.gif',)).toBeVisible() 
+	
 	});
+		
+	
 
 });
