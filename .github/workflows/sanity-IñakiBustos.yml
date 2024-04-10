@@ -12,9 +12,7 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-
-    branches: ['GX3-2907-⚡️-tools-qa-widgets-dropdown-select-menu'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
-
+    branches: ['GX3-3006-⚡️-tools-qa-elements-upload-and-download'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
@@ -42,10 +40,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-
-      bun run test:ci tests/specs/widgets/GX3-2907_Dropdown-SelectMenu.spec.ts
-
-
+        bun run test:ci tests/specs/elements/GX3-3006_Tools-qa-Elements_Upload_and_Download.spec.ts
 
     - name: 📊Generate Allure Report
       run: |
@@ -69,7 +64,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-2914' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-3013' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
@@ -99,3 +94,4 @@ jobs:
         SLACK_MESSAGE: ':test_tube: Playwright: Test Execution is Done and updated in Jira :rocket:'
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
+
