@@ -1,12 +1,14 @@
-import{ expect, test } from '@playwright/test';
+import{expect, test } from '@playwright/test';
 //import { faker } from '@faker-js/faker';
-import { RandomFillForm, GenderOptionsForm, HobbiesOptionsForm,UploadPicture,SubjectsFill,StateCitySelect} from '@pages/iñakibustosGX3-3047';
+import { RandomFillForm, GenderOptionsForm, HobbiesOptionsForm,UploadPicture,SubjectFill,StateCitySelect,SubmitForm} from '@pages/iñakibustosGX3-3047';
 let randomFillForm: RandomFillForm;
 let genderOptionsForm: GenderOptionsForm;
 let hobbiesOptionsForm: HobbiesOptionsForm;
 let uploadPicture: UploadPicture;
-let subjectsFill: SubjectsFill;
+let subjectFill: SubjectFill;
 let stateCitySelect: StateCitySelect;
+let submitForm: SubmitForm;
+
 
 test.describe('GX3-3047_Practice-Form',() => {
     test.beforeEach(async ( { page } ) => {
@@ -14,12 +16,13 @@ test.describe('GX3-3047_Practice-Form',() => {
 		genderOptionsForm= new GenderOptionsForm(page);
 		hobbiesOptionsForm= new HobbiesOptionsForm(page);
 		uploadPicture= new UploadPicture(page);
-		//subjectsFill= new SubjectsFill(page);
+		subjectFill= new SubjectFill(page);
 		stateCitySelect= new StateCitySelect(page);
+		submitForm= new SubmitForm(page);
         await page.goto('https://demoqa.com/automation-practice-form',{ waitUntil: 'domcontentloaded' });
     });
 	
-	test('TC1:Validar llenar el formulario',async ({page})=>{
+	test('TC1:Validar llenar el formulario',async ()=>{
 		
 		await test.step('Fill name,email,date,address', async () => {
 			await randomFillForm.fillForm();
@@ -47,7 +50,19 @@ test.describe('GX3-3047_Practice-Form',() => {
 			await stateCitySelect.selectRandomCity();
 			expect(stateCitySelect).not.toBeNaN();
 
+		});
+
+		await test.step('fill subjects', async () => {
+			await subjectFill.insertRandomSubject();
+			expect(subjectFill).toBeDefined();
+		});
+
+		await test.step('Submit Form', async () => {
+			await submitForm.clickSubmitBtn();
 		})
+		
+		
+		
 	
 	
 	});

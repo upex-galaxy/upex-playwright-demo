@@ -17,7 +17,7 @@ export class RandomFillForm {
 	private currentAddress: Locator;
 	private dateOfBirth:Locator;
 
-	constructor ( page ){
+	constructor ( page: Page ){
 		this.page = page;
 		this.firstName= page.locator('#firstName');
 		this.lastName= page.locator('#lastName');
@@ -149,23 +149,39 @@ export class UploadPicture{
 
 
 
-export class SubjectsFill{
-	private page:Page;
+export class SubjectFill{
+	private page: Page;
 	private subjectContainer: Locator;
 
-	constructor(page:Page) {
+	constructor(page:Page){
 		this.page=page;
-		this.subjectContainer = page.locator('.subjects-auto-complete__value-container');		
+		this.subjectContainer= page.locator('#subjectsContainer');
 	}
-	async insertRandomValues() {
-    const Subjects = data['Subjects']
-	const randomIndex = Math.floor(Math.random() * Subjects.length);
-    const randomSubject = Subjects[randomIndex];
 
+	
+
+	async generateFilteredSubject(): Promise<string> {
+		const lettersToOmit = ['x', 'y', 'z'];
+		let subject = faker.string.alpha();
+
+    
+		while (lettersToOmit.includes(subject.toLowerCase())) {
+			subject = faker.string.alpha();
+		}
+
+    return subject;
+	}
+
+	async insertRandomSubject() {
+    const filteredSubject = await this.generateFilteredSubject();
     await this.subjectContainer.click();
-	await this.subjectContainer.fill(Subjects[0]);
+	await this.subjectContainer.type(filteredSubject);
+	await this.subjectContainer.focus();
     await this.page.keyboard.press('Enter');
 	}
+
+
+
 }
 
 
@@ -186,13 +202,16 @@ export class StateCitySelect{
 	async selectRandomState(): Promise<string> {
 		const countries = data[1].Countries;
     	const randomIndex = Math.floor(Math.random() * countries.length);
-    	const randomState = countries[randomIndex];
+		const randomState = countries[randomIndex];
 
-    	await this.selectState.click();
-    	await this.page.locator(`#state >> text="${randomState}"`).click();
+		await this.selectState.click();
+		//await this.page.locator(`#state >> text="${randomState}"`).focus();
+		const stateElement = await this.page.getByText(randomState,{exact:true});
+		
+		await stateElement.click();
 
     return randomState;
-  	}
+	}
 
 	async selectRandomCity(): Promise<string> {
     const randomState = await this.selectRandomState();
@@ -201,12 +220,32 @@ export class StateCitySelect{
     const randomCity = cities[randomCityIndex];
 
     await this.selectCity.click();
-    await this.page.locator(`#city >> text="${randomCity}"`).click();
+    
+	await this.page.locator(`#city >> text="${randomCity}"`).click();
 
     return randomCity;
-  }
-
-		
+	}
 		
 }	
+
+
+
+export class SubmitForm{
+	private page:Page;
+	private submitBtn: Locator;
+
+	constructor(page:Page){
+		this.page=page;
+		this.submitBtn= page.locator('#submit')
+
+	}
+	
+	async clickSubmitBtn(){
+		await this.submitBtn.click();
+	}
+}
+
+
+
+
 
