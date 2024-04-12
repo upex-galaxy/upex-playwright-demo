@@ -4,8 +4,8 @@ import path from 'path';
 import data from '@data/iñakibustosUserDetail.json' assert { type: 'json' };
 
 type CountryData = {
-  Countries: string[];
-  [key: string]: string[];
+	Countries: string[];
+	[key: string]: string[];
 };
 
 export class RandomFillForm {
