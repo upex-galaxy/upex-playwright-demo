@@ -77,6 +77,40 @@ export class RandomFillForm {
 		const year = String(dateOfBirth.getFullYear());
 		return `${month}/${day}/${year}`;
 	}
+
+
+
+	async nullFirstName():Promise <null>{
+		await this.firstName.fill('')
+		return null;
+	}
+	async nullLastName():Promise <null>{
+		await this.lastName.fill('')
+		return null;
+	}
+	async nullEmail():Promise <null>{
+		await this.email.fill('')
+		return null;
+	}
+	async incorrectEmail(){
+		await this.email.fill(faker.person.fullName())
+	};
+
+	async nullMobileNumber():Promise <null>{
+		await this.mobileNumber.fill('')
+		return null;
+	}
+	async incorrectMobileNumber(){
+		await this.mobileNumber.fill(faker.vehicle.color());
+	};
+	async nullDate():Promise <null>{
+		await this.dateOfBirth.fill('')
+		return null;
+	}
+	async nullAddress():Promise <null>{
+		await this.currentAddress.fill('')
+		return null;
+	}
 }
 
 	
@@ -206,7 +240,7 @@ export class StateCitySelect{
 
 		await this.selectState.click();
 		//await this.page.locator(`#state >> text="${randomState}"`).focus();
-		const stateElement = await this.page.getByText(randomState,{exact:true});
+		const stateElement = await this.page.getByText(randomState,{exact:true}).nth(0);
 		
 		await stateElement.click();
 
@@ -233,15 +267,21 @@ export class StateCitySelect{
 export class SubmitForm{
 	private page:Page;
 	private submitBtn: Locator;
+	private formPopUp: Locator;
 
 	constructor(page:Page){
 		this.page=page;
 		this.submitBtn= page.locator('#submit')
+		this.formPopUp= page.locator('tr[class="table-responsive"]');
+		
 
 	}
 	
 	async clickSubmitBtn(){
 		await this.submitBtn.click();
+	}
+	async formValidation(){
+		await this.formPopUp.isVisible();
 	}
 }
 
