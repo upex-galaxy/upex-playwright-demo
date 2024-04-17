@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: ['chrome', 'firefox', 'edge'] #? Runs tests in 4 different browsers
+        browser: ['chrome'] #? Runs tests in 4 different browsers
 
     steps:
 

@@ -1,20 +1,17 @@
-import{test,expect,Page} from '@playwright/test';
+import type{ Page } from '@playwright/test';
+import { test, expect } from '@TestBase';
 import data from '@data/iñakibustosUserDetail.json' assert { type: 'json' };
 
-let page:Page;
-
-test.describe('GX3-2854 ',()=>{
-	test.beforeEach(async({page})=>{
+test.describe('GX3-2854 ',() => {
+	test.beforeEach(async ({ page }) => {
 		await page.goto('https://demoqa.com/text-box');
 	});
 
-	test('TC1 Validar completar el formulario',async({page})=>{
+	test('TC1 Validar completar el formulario',async ({ page }) => {
 		const usernameInput = page.locator('#userName-wrapper input');
 		const emailInput= page.locator('#userEmail-wrapper input');
 		const currentAdInput= page.locator('#currentAddress-wrapper textarea');
 		const permanentAdInput= page.locator('#permanentAddress-wrapper textarea');
-		
-		
 		
 		await test.step('deberia completarse el campo fullname', async () => {
 			await usernameInput.fill(data[0].fullName);
@@ -32,12 +29,10 @@ test.describe('GX3-2854 ',()=>{
 			await permanentAdInput.fill(data[0].permanentAddress);
 		});
 
-		
-
 	});
 
-	test('TC2: Validar enviar formulario', async({page})=>{
-		const submitButton= page.locator('button',{hasText:'Submit'});
+	test('TC2: Validar enviar formulario', async ({ page }) => {
+		const submitButton= page.locator('button',{ hasText:'Submit' });
 		const outputName=page.locator('#output #name');
 		const outputEmail=page.locator('#output #email');
 		const outputCurrentAd=page.locator('#output #currentAddress');
@@ -47,8 +42,6 @@ test.describe('GX3-2854 ',()=>{
 		const currentAdInput= page.locator('#currentAddress-wrapper textarea');
 		const permanentAdInput= page.locator('#permanentAddress-wrapper textarea');
 		
-		
-		
 		await test.step('deberia completarse el campo fullname', async () => {
 			await usernameInput.fill(data[0].fullName);
 		});
@@ -64,7 +57,6 @@ test.describe('GX3-2854 ',()=>{
 		await test.step('deberia completarse el campo permanentAddress', async () => {
 			await permanentAdInput.fill(data[0].permanentAddress);
 		});
-
 
 		await test.step('enviar formulario', async () => {
 			await submitButton.click();
@@ -79,7 +71,5 @@ test.describe('GX3-2854 ',()=>{
 		});
 		
 	});
-
-
 
 });
