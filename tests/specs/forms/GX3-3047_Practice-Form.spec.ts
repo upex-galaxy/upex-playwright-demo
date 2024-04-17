@@ -1,6 +1,7 @@
-import{expect, test,Page } from '@playwright/test';
+import type{ Page } from '@playwright/test';
+import { test, expect } from '@TestBase';
 //import { faker } from '@faker-js/faker';
-import { RandomFillForm, GenderOptionsForm, HobbiesOptionsForm,UploadPicture,SubjectFill,StateCitySelect,SubmitForm} from '@pages/iñakibustosGX3-3047';
+import { RandomFillForm, GenderOptionsForm, HobbiesOptionsForm,UploadPicture,SubjectFill,StateCitySelect,SubmitForm } from '@pages/iñakibustosGX3-3047';
 let randomFillForm: RandomFillForm;
 let genderOptionsForm: GenderOptionsForm;
 let hobbiesOptionsForm: HobbiesOptionsForm;
@@ -10,10 +11,8 @@ let stateCitySelect: StateCitySelect;
 let submitForm: SubmitForm;
 let page: Page;
 
-
-
 test.describe('GX3-3047_Practice-Form',() => {
-    test.beforeEach(async ( { page } ) => {
+	test.beforeEach(async ( { page } ) => {
 		randomFillForm= new RandomFillForm(page);
 		genderOptionsForm= new GenderOptionsForm(page);
 		hobbiesOptionsForm= new HobbiesOptionsForm(page);
@@ -21,14 +20,14 @@ test.describe('GX3-3047_Practice-Form',() => {
 		subjectFill= new SubjectFill(page);
 		stateCitySelect= new StateCitySelect(page);
 		submitForm= new SubmitForm(page);
-        await page.goto('https://demoqa.com/automation-practice-form',{ waitUntil: 'domcontentloaded' });
-    });
+		await page.goto('https://demoqa.com/automation-practice-form',{ waitUntil: 'domcontentloaded' });
+	});
 	
-	test('TC1:Validar llenar el formulario',async ()=>{
+	test('TC1:Validar llenar el formulario',async () => {
 		
 		await test.step('Fill name,email,date,address', async () => {
 			await randomFillForm.fillForm();
-			expect(randomFillForm).not.toBeNull()
+			expect(randomFillForm).not.toBeNull();
 		});
 
 		await test.step('select gender', async () => {			
@@ -66,12 +65,11 @@ test.describe('GX3-3047_Practice-Form',() => {
 			await submitForm.formValidation();
 			expect(submitForm.formValidation).not.toBeNull();
 			
-			
-		})
+		});
 			
 	});
 
-	test.skip('TC2:insertar valores null en el form',async({page})=>{
+	test.skip('TC2:insertar valores null en el form',async ({ page }) => {
 
 		test.step('fill firstName null, lastName null,email null', async () => {
 			const FirstName= page.locator('#firstName');
@@ -105,8 +103,8 @@ test.describe('GX3-3047_Practice-Form',() => {
 		
 		await test.step('gender option select null', async () => {
 			const GenderOption1= page.getByText('Male', { exact: true });
-			const GenderOption2= page.getByText('Female',{exact: true});
-			const GenderOption3= page.getByText('Other',{exact: true });
+			const GenderOption2= page.getByText('Female',{ exact: true });
+			const GenderOption3= page.getByText('Other',{ exact: true });
 
 			expect(GenderOption1).not.toBeChecked();
 			expect(GenderOption2).not.toBeChecked();
@@ -114,9 +112,9 @@ test.describe('GX3-3047_Practice-Form',() => {
 		});
 		
 		await test.step('hobbies option selector null', async () => {
-			const hobbieMusic= page.getByText('Music',{exact:true});
-			const hobbieSports= page.getByText('Sports',{exact:true});
-			const hobbieRead= page.getByText('Reading',{exact:true});
+			const hobbieMusic= page.getByText('Music',{ exact:true });
+			const hobbieSports= page.getByText('Sports',{ exact:true });
+			const hobbieRead= page.getByText('Reading',{ exact:true });
 
 			expect(hobbieMusic).not.toBeChecked();
 			expect(hobbieSports).not.toBeChecked();
@@ -142,15 +140,14 @@ test.describe('GX3-3047_Practice-Form',() => {
 		});
 		await test.step('submit form', async () => {
 			await submitForm.clickSubmitBtn();
-			expect(submitForm.formValidation).not.toContain('Thanks for submitting the form')
-		})
-		
+			expect(submitForm.formValidation).not.toContain('Thanks for submitting the form');
+		});
 		
 	});
 
-	test('TC3:Validar email incorrecto ',async()=>{
+	test('TC3:Validar email incorrecto ',async () => {
 		
-		await test.step('start complete form', async () =>{
+		await test.step('start complete form', async () => {
 			await randomFillForm.fillForm();
 
 		});
@@ -173,10 +170,9 @@ test.describe('GX3-3047_Practice-Form',() => {
 
 		});
 		
-		
 	});
 
-	test('TC4:Validar ingresar un valor no numerico en Mobile number',async()=>{
+	test('TC4:Validar ingresar un valor no numerico en Mobile number',async () => {
 		
 		await test.step('start complete form', async () => {
 			await randomFillForm.fillForm();
@@ -194,10 +190,8 @@ test.describe('GX3-3047_Practice-Form',() => {
 			await stateCitySelect.selectRandomCity();
 			await subjectFill.insertRandomSubject();
 			await submitForm.clickSubmitBtn();
-			expect(submitForm.formValidation).not.toContain('Thanks for submitting the form')
+			expect(submitForm.formValidation).not.toContain('Thanks for submitting the form');
 		});
 		
-		
-	})
+	});
 });
-
