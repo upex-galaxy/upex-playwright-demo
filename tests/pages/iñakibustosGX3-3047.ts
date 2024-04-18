@@ -1,12 +1,6 @@
 import type { Page,Locator } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import path from 'path';
-import data from '@data/bustosUserDetail.json' assert { type: 'json' };
-
-type CountryData = {
-	Countries: string[];
-	[key: string]: string[];
-};
 
 export class RandomFillForm {
 	private page:Page;
@@ -182,7 +176,7 @@ export class SubjectFill {
 	}
 
 	async generateFilteredSubject(): Promise<string> {
-		const lettersToOmit = ['x', 'y', 'z'];
+		const lettersToOmit = ['q','w','f','j','k','z','x'];
 		let subject = faker.string.alpha();
     
 		while (lettersToOmit.includes(subject.toLowerCase())) 
@@ -204,41 +198,33 @@ export class SubjectFill {
 export class StateCitySelect {
 	private page:Page;
 	private selectState: Locator;
-	private selectCity: Locator;
-	private cityOptions: Locator;
+	private selectCity:Locator;
+	private cities: Locator;
+	private countries: Locator;
 
 	constructor(page:Page) {
 		this.page=page;
 		this.selectState= page.locator('#state');
 		this.selectCity= page.locator('#city');
-		this.cityOptions = page.locator('#city >> div.css-1hwfws3');
+		this.cities = page.locator('[id^="react-select-4-option-"]');
+		this.countries= page.locator('[id^="react-select-3-option-"]');
 	}
 
-	async selectRandomState(): Promise<string> {
-		const countries = data[1].Countries;
-    	const randomIndex = Math.floor(Math.random() * countries.length);
-		const randomState = countries[randomIndex];
-
+	async selectRandomState() {
 		await this.selectState.click();
-		//await this.page.locator(`#state >> text="${randomState}"`).focus();
-		const stateElement = await this.page.getByText(randomState,{ exact:true }).nth(0);
-		
-		await stateElement.click();
+		const countriesCount= await this.countries.count();
+		const randomIndex = Math.floor(Math.random()* countriesCount);
+		await this.countries.nth(randomIndex).click();
+		//const countryName= await this.countries.nth(randomIndex).innerText();
 
-		return randomState;
 	}
 
-	async selectRandomCity(): Promise<string> {
-		const randomState = await this.selectRandomState();
-		const cities = (data[1] as CountryData)[randomState];
-		const randomCityIndex = Math.floor(Math.random() * cities.length);
-		const randomCity = cities[randomCityIndex];
-
+	async selectRandomCity() {
 		await this.selectCity.click();
-    
-		await this.page.locator(`#city >> text="${randomCity}"`).click();
-
-		return randomCity;
+		const citiesCount= await this.cities.count();
+		const randomIndex= Math.floor(Math.random()* citiesCount);
+		await this.cities.nth(randomIndex).click();
+		
 	}
 		
 }	

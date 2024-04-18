@@ -1,6 +1,13 @@
 import type{ Page } from '@playwright/test';
 import { test, expect } from '@TestBase';
-import data from '@data/iñakibustosUserDetail.json' assert { type: 'json' };
+import data from '@data/bustosUserDetail.json' assert { type: 'json' };
+
+interface UserData {
+	fullName: string;
+	email: string;
+	currentAddress: string;
+	permanentAddress: string;
+}
 
 test.describe('GX3-2854 ',() => {
 	test.beforeEach(async ({ page }) => {
@@ -14,19 +21,19 @@ test.describe('GX3-2854 ',() => {
 		const permanentAdInput= page.locator('#permanentAddress-wrapper textarea');
 		
 		await test.step('deberia completarse el campo fullname', async () => {
-			await usernameInput.fill(data[0].fullName);
+			await usernameInput.fill((data as UserData).fullName);
 		});
 
 		await test.step('debería completarse el campo email', async () => {
-			await emailInput.fill(data[0].email);
+			await emailInput.fill((data as UserData).email);
 		});
 
 		await test.step('deberia completarse el campo currentAddress', async () => {
-			await currentAdInput.fill(data[0].currentAddress);
+			await currentAdInput.fill((data as UserData).currentAddress);
 		});
 
 		await test.step('deberia completarse el campo permanentAddress', async () => {
-			await permanentAdInput.fill(data[0].permanentAddress);
+			await permanentAdInput.fill((data as UserData).permanentAddress);
 		});
 
 	});
@@ -43,19 +50,19 @@ test.describe('GX3-2854 ',() => {
 		const permanentAdInput= page.locator('#permanentAddress-wrapper textarea');
 		
 		await test.step('deberia completarse el campo fullname', async () => {
-			await usernameInput.fill(data[0].fullName);
+			await usernameInput.fill((data as UserData).fullName);
 		});
 
 		await test.step('debería completarse el campo email', async () => {
-			await emailInput.fill(data[0].email);
+			await emailInput.fill((data as UserData).email);
 		});
 
 		await test.step('deberia completarse el campo currentAddress', async () => {
-			await currentAdInput.fill(data[0].currentAddress);
+			await currentAdInput.fill((data as UserData).currentAddress);
 		});
 
 		await test.step('deberia completarse el campo permanentAddress', async () => {
-			await permanentAdInput.fill(data[0].permanentAddress);
+			await permanentAdInput.fill((data as UserData).permanentAddress);
 		});
 
 		await test.step('enviar formulario', async () => {
@@ -64,10 +71,10 @@ test.describe('GX3-2854 ',() => {
 		});
 
 		await test.step('verificar el output', async () => {
-			expect(outputName).toContainText(data[0].fullName);
-			expect(outputEmail).toContainText(data[0].email);
-			expect(outputCurrentAd).toContainText(data[0].currentAddress);
-			expect(outputPermanentAd).toContainText(data[0].permanentAddress);
+			expect(outputName).toContainText((data as UserData).fullName);
+			expect(outputEmail).toContainText((data as UserData).email);
+			expect(outputCurrentAd).toContainText((data as UserData).currentAddress);
+			expect(outputPermanentAd).toContainText((data as UserData).permanentAddress);
 		});
 		
 	});
