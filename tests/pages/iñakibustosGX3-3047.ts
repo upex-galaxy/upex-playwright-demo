@@ -1,6 +1,12 @@
 import type { Page,Locator } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import path from 'path';
+import data from '@data/bustosUserDetail.json' assert { type: 'json' };
+
+type CountryData = {
+	Countries: string[];
+	[key: string]: string[];
+};
 
 export class RandomFillForm {
 	private page:Page;
@@ -212,19 +218,25 @@ export class StateCitySelect {
 
 	async selectRandomState() {
 		await this.selectState.click();
-		const countriesCount= await this.countries.count();
-		const randomIndex = Math.floor(Math.random()* countriesCount);
-		await this.countries.nth(randomIndex).click();
-		//const countryName= await this.countries.nth(randomIndex).innerText();
+		//await this.page.locator(`#state >> text="${randomState}"`).focus();
+		const stateElement = await this.page.getByText(randomState,{ exact:true }).nth(0);
+		
+		await stateElement.click();
 
+		return randomState;
 	}
 
-	async selectRandomCity() {
+	async selectRandomCity(): Promise<string> {
+		const randomState = await this.selectRandomState();
+		const cities = (data[1] as CountryData)[randomState];
+		const randomCityIndex = Math.floor(Math.random() * cities.length);
+		const randomCity = cities[randomCityIndex];
+
 		await this.selectCity.click();
-		const citiesCount= await this.cities.count();
-		const randomIndex= Math.floor(Math.random()* citiesCount);
-		await this.cities.nth(randomIndex).click();
-		
+    
+		await this.page.locator(`#city >> text="${randomCity}"`).click();
+
+		return randomCity;
 	}
 		
 }	

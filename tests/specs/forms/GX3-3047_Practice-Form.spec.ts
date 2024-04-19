@@ -1,4 +1,4 @@
-
+import type{ Page } from '@playwright/test';
 import { test, expect } from '@TestBase';
 //import { faker } from '@faker-js/faker';
 import { RandomFillForm, GenderOptionsForm, HobbiesOptionsForm,UploadPicture,SubjectFill,StateCitySelect,SubmitForm } from '@pages/iñakibustosGX3-3047';
@@ -9,6 +9,7 @@ let uploadPicture: UploadPicture;
 let subjectFill: SubjectFill;
 let stateCitySelect: StateCitySelect;
 let submitForm: SubmitForm;
+let page: Page;
 
 test.describe('GX3-3047_Practice-Form',() => {
 	test.beforeEach(async ( { page } ) => {
@@ -101,9 +102,9 @@ test.describe('GX3-3047_Practice-Form',() => {
 		});
 		
 		await test.step('gender option select null', async () => {
-			const genderOption1= page.getByText('Male', { exact: true });
-			const genderOption2= page.getByText('Female',{ exact: true });
-			const genderOption3= page.getByText('Other',{ exact: true });
+			const GenderOption1= page.getByText('Male', { exact: true });
+			const GenderOption2= page.getByText('Female',{ exact: true });
+			const GenderOption3= page.getByText('Other',{ exact: true });
 
 			expect(genderOption1).not.toBeChecked();
 			expect(genderOption2).not.toBeChecked();
