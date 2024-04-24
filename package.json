@@ -4,7 +4,7 @@
   "description": "playwright project with typescript and azure devops integration",
   "main": "index.js",
   "scripts": {
-    "pw:install": "npx playwright install --with-deps",
+    "pw:install": "npx playwright install",
     "test:plan": "npx playwright test --reporter=list --project=chromium --list",
     "test:ui": "npx playwright test --ui",
     "test:trace": "npx playwright show-trace",
