@@ -60,15 +60,15 @@ export default defineConfig({
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'], channel: 'chrome' },
 		},
-		// {
-		// 	name: 'firefox',
-		// 	use: { ...devices['Desktop Firefox'] },
-		// },
+		{
+			name: 'firefox',
+			use: { ...devices['Desktop Firefox'] },
+		},
 		//* Test against branded browsers:
-		// {
-		// 	name: 'edge',
-		// 	use: { ...devices['Desktop Edge'], channel: 'msedge' },
-		// },
+		{
+			name: 'edge',
+			use: { ...devices['Desktop Edge'], channel: 'msedge' },
+		},
 		//* Test against mobile Devices:
 		// {
 		// 	name: 'iphone',
