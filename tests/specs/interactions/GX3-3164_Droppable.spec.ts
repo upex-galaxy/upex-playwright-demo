@@ -19,14 +19,14 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		revertDrop= new RevertDrop(page);
 	});
 	
-	test('TC1: Move simple drop',async ({ page }) => {
+	test('TC1: Validate the simple item to be dropped on the Simple tab',async ({ page }) => {
 		await simpleDrop.dragSimple();
 		const droppable = page.locator('#droppable').nth(0);
 
 		await expect(droppable).toHaveText('Dropped!');
 	});
 
-	test('TC2: acceptable Item drop',async ( { page } ) => {
+	test('TC2: Validate the "accept" item to be dropped on the "Accept" tab of the Simple tab. ',async ( { page } ) => {
 		const droppable = page.locator('#droppable').nth(1);
 		
 		await test.step('click on accept page', async () => {
@@ -40,7 +40,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 
 	});
 
-	test('TC3: not acceptable item drop', async ({ page }) => {				
+	test('TC3: Validate the "not accept item" to not be dropped on the "Accept" droppable of the Simple tab.', async ({ page }) => {				
 		const droppable = page.locator('#droppable').nth(0);
 		
 		await test.step('click on accept page', async () => {
@@ -54,7 +54,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC4: drop item into outer droppable box 1', async ({ page }) => {
+	test('TC4: Validate the item to be dropped on the "Outer not greedy" droppable of the Prevent Propogation tab.', async ({ page }) => {
 		const outDroppable = page.locator('#notGreedyDropBox');
 		//const innerDroppable = page.locator('#notGreedyInnerDropBox');
 		
@@ -70,7 +70,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC5: drop into not greedy inner drop box', async ({ page }) => {
+	test('TC5: Validate the item to be dropped on the "Inner not greedy" droppable of the Prevent Propogation tab.', async ({ page }) => {
 		const innerDroppable = page.locator('#notGreedyInnerDropBox');
 		
 		await test.step('click on Prevent Propogation page', async () => {
@@ -84,7 +84,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC6: drop into outer droppable box 2',async ({ page }) => {
+	test('TC6: Validate the item to be dropped on the "Outer greedy" droppable of the Prevent Propogation tab.',async ({ page }) => {
 		const outerDroppable = page.locator('#greedyDropBox');
 		
 		await test.step('click on Prevent Propogation page', async () => {
@@ -98,7 +98,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC7: drop into greedy inner drop box', async ({ page }) => {
+	test('TC7: Validate the item to be dropped on the "Inner greedy" droppable of the Prevent Propogation tab.', async ({ page }) => {
 		const innerDroppable = page.locator('#greedyDropBoxInner');
 		
 		await test.step('click on prevent propogation page', async () => {
@@ -111,7 +111,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC8: drop not revert item into drop box', async ({ page }) => {
+	test('TC8: Validate the "Not revert" item to be dropped on the drop of the Revert Draggable tab. ', async ({ page }) => {
 		const droppable = page.getByLabel('Revert Draggable').locator('#droppable');
 
 		await test.step('click on revert draggable page', async () => {
@@ -124,7 +124,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC9: drop revert item into drop box', async ({ page }) => {
+	test('TC9: Validate the "Will revert" item to be dropped on the drop of the Revert Draggable tab.', async ({ page }) => {
 		const droppable = page.getByLabel('Revert Draggable').locator('#droppable');
 		await test.step('click on revert draggable page', async () => {
 			await changeTab.revertTabPage();
@@ -137,7 +137,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC10: hover accept Item', async ({ page }) => {
+	test('TC10: Validate the "accept" item to be hover on the "Accept" tab of the Simple tab.', async ({ page }) => {
 		const droppable = page.locator('#droppable').nth(1);
 
 		await test.step('click on accept page', async () => {
@@ -151,7 +151,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 
 	});
 
-	test('TC11: hover outer droppable prevent page',async ({ page }) => {
+	test('TC11: Validate the item to be hover on the "Outer not greedy" droppable of the Prevent Propogation tab.',async ({ page }) => {
 		const outDroppable = page.locator('#notGreedyDropBox');
 		await test.step('click on Prevent Propogation page', async () => {
 			await changeTab.preventTabPage();
@@ -164,7 +164,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC12: hover inner droppable prevent page', async ({ page }) => {
+	test('TC12: Validate the item to be hover on the "Inner not greedy" droppable of the Prevent Propogation tab.', async ({ page }) => {
 		const innerDroppable = page.locator('#notGreedyInnerDropBox');
 		await test.step('click on Prevent Propogation page', async () => {
 			await changeTab.preventTabPage();
@@ -177,7 +177,7 @@ test.describe('GX3-3164 interactions-droppable', () => {
 		
 	});
 
-	test('TC13: hover revert item ', async ({ page }) => {
+	test('TC13: Validate the "Will revert" item to be hover on the drop of the Revert Draggable tab.', async ({ page }) => {
 		const droppable = page.getByLabel('Revert Draggable').locator('#droppable');
 
 		await test.step('click on revert draggable page', async () => {
