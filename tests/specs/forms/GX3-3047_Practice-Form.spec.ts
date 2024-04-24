@@ -72,33 +72,33 @@ test.describe('GX3-3047_Practice-Form',() => {
 	test.skip('TC2:insertar valores null en el form',async ({ page }) => {
 
 		test.step('fill firstName null, lastName null,email null', async () => {
-			const FirstName= page.locator('#firstName');
-			const LastName= page.locator('#lastName');
-			const Email= page.locator('#userEmail');
+			const firstName= page.locator('#firstName');
+			const lastName= page.locator('#lastName');
+			const email= page.locator('#userEmail');
 
 			await randomFillForm.nullFirstName();			
-			expect(FirstName).toHaveValue('');
+			expect(firstName).toHaveValue('');
 
 			await randomFillForm.nullLastName();
-			expect (LastName).toHaveValue('');
+			expect (lastName).toHaveValue('');
 
 			await randomFillForm.nullEmail();
-			expect(Email).toHaveValue('');			
+			expect(email).toHaveValue('');			
 		});
 
 		test.step('fill mobileNumber null, dateOfBirth null, currentAddress null', async () => {
-			const MobileNumber= page.locator('#userNumber');
-			const DateOfBirth= page.locator('#dateOfBirthInput');
-			const Address= page.locator('#currentAddress');
+			const mobileNumber= page.locator('#userNumber');
+			const dateOfBirth= page.locator('#dateOfBirthInput');
+			const address= page.locator('#currentAddress');
 
 			await randomFillForm.nullMobileNumber();
-			expect(MobileNumber).toHaveValue('');
+			expect(mobileNumber).toHaveValue('');
 
 			await randomFillForm.nullDate();
-			expect(DateOfBirth).toHaveValue('');
+			expect(dateOfBirth).toHaveValue('');
 
 			await randomFillForm.nullAddress();
-			expect(Address).toHaveValue('');
+			expect(address).toHaveValue('');
 		});
 		
 		await test.step('gender option select null', async () => {
@@ -106,9 +106,9 @@ test.describe('GX3-3047_Practice-Form',() => {
 			const GenderOption2= page.getByText('Female',{ exact: true });
 			const GenderOption3= page.getByText('Other',{ exact: true });
 
-			expect(GenderOption1).not.toBeChecked();
-			expect(GenderOption2).not.toBeChecked();
-			expect(GenderOption3).not.toBeChecked();
+			expect(genderOption1).not.toBeChecked();
+			expect(genderOption2).not.toBeChecked();
+			expect(genderOption3).not.toBeChecked();
 		});
 		
 		await test.step('hobbies option selector null', async () => {
