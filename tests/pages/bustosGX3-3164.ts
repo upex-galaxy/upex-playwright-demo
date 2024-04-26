@@ -36,7 +36,13 @@ export class SimpleDrop {
 
 	async dragSimple() {
 		await this.dragItem.dragTo(this.droppable);
-		
+
+		const dropText = await this.droppable.innerText();
+
+		// eslint-disable-next-line curly
+		if (dropText.includes('drop here')) {
+			await this.dragItem.dragTo(this.droppable);
+		}
 	}
 }
 
@@ -56,7 +62,12 @@ export class AcceptDrop {
 	async acceptableDrag() {
 		await this.acceptableItem.dragTo(this.droppable, {
 			targetPosition:{ x:20,y:20 }
+			
 		});
+		const dropText = await this.droppable.innerText();
+
+		if (dropText.includes('drop here')) 
+			await this.acceptableItem.dragTo(this.droppable);
 	}
 
 	async notAcceptableDrag() {
@@ -97,6 +108,10 @@ export class PreventDrop {
 		await this.dragItem.dragTo(this.innerDroppNotGreedy,{
 			targetPosition: { x:60,y:40 }
 		});
+		const dropText = await this.innerDroppNotGreedy.innerText();
+
+		if (dropText.includes('drop here')) 
+			await this.dragItem.dragTo(this.innerDroppNotGreedy);
 	}
 
 	async dragIntoOuterDroppable2() {
@@ -109,6 +124,11 @@ export class PreventDrop {
 		await this.dragItem.dragTo(this.innerDroppGreedy, {
 			targetPosition: { x:60,y:40 } 
 		});
+
+		const dropText = await this.innerDroppGreedy.innerText();
+
+		if (dropText.includes('drop here')) 
+			await this.dragItem.dragTo(this.innerDroppGreedy);
 	}
 
 	async hoverOuterBox() {
@@ -142,12 +162,22 @@ export class RevertDrop {
 		await this.revertItem.dragTo(this.droppableBox,{
 			targetPosition: { x:60,y:60 } 
 		});
+		
+		const dropText = await this.droppableBox.innerText();
+
+		if (dropText.includes('drop here')) 
+			await this.revertItem.dragTo(this.droppableBox);
 	}
 
 	async itemDropNotRevert() {
 		await this.notRevertItem.dragTo(this.droppableBox,{
 			targetPosition: { x:60,y:60 } 
 		});
+		
+		const dropText = await this.droppableBox.innerText();
+
+		if (dropText.includes('drop here')) 
+			await this.notRevertItem.dragTo(this.droppableBox);
 	}
 
 	async hoverRevertItem() {
