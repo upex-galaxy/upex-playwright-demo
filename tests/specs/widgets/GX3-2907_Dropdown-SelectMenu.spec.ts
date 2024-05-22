@@ -1,4 +1,4 @@
-import{ expect, test } from '@playwright/test';
+import{ expect, test } from '@TestBase';
 import { DropPom } from '@pages/iñakibustosGX3-2907';
 
 test.describe('GX3-2907 |ToolsQA | Widgets | Dropdown - Select Menu',() => {

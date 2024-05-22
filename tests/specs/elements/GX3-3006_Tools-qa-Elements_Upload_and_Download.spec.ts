@@ -11,7 +11,7 @@ test.describe('GX3-3006 | ToolsQA | Elements | Upload and Download',() => {
 		await page.goto('https://demoqa.com/upload-download',{ waitUntil:'domcontentloaded' });
 	});
 
-	test('TC1: Validar descargar un archivo desde demoqa', async ({ page }) => {
+	test('TC1: Validar descargar un archivo desde demoqa', async () => {
 		
 		const filePath = await downloadPage.downloadFile();
 
@@ -23,7 +23,7 @@ test.describe('GX3-3006 | ToolsQA | Elements | Upload and Download',() => {
 		
 		await uploadPage.uploadFiles();
 
-		expect(page.getByText('C:\\fakepath\\upexgalaxy.gif')).toBeVisible(); 
+		await expect(page.getByText('C:\\fakepath\\upexgalaxy.gif')).toBeVisible(); 
 	
 	});
 
