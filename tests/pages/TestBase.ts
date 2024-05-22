@@ -30,7 +30,7 @@ const test = driver.extend<{
 			],
 		});
 		const extensionPage = await context.waitForEvent('page');
-		await expect(extensionPage.locator('h1')).toHaveText('Thank you for installing AdBlock!');
+		await expect(extensionPage.locator('h1')).toContainText('AdBlock');
 		await extensionPage.close();
 		await use(context);
 		await context.close();

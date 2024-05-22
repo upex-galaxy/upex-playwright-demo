@@ -63,10 +63,10 @@ test.describe('GX3-2854 ',() => {
 		});
 
 		await test.step('verificar el output', async () => {
-			expect(outputName).toContainText(data[0].fullName);
-			expect(outputEmail).toContainText(data[0].email);
-			expect(outputCurrentAd).toContainText(data[0].currentAddress);
-			expect(outputPermanentAd).toContainText(data[0].permanentAddress);
+			await expect(outputName).toContainText(data[0].fullName);
+			await expect(outputEmail).toContainText(data[0].email);
+			await expect(outputCurrentAd).toContainText(data[0].currentAddress);
+			await expect(outputPermanentAd).toContainText(data[0].permanentAddress);
 		});
 		
 	});

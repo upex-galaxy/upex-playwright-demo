@@ -1,12 +1,11 @@
 import type { Page,Locator } from '@playwright/test';
 import path from 'path';
 
-//download
 export class DownloadPage {
 	private page:Page;
 	private downloadBtn: Locator;
 
-	constructor(page) {
+	constructor(page: Page) {
 		this.page = page;
 		this.downloadBtn = page.locator('#downloadButton');
 	}
@@ -28,7 +27,7 @@ export class UploadPage {
 	private page:Page;
 	private uploadBtn: Locator;
 
-	constructor(page) {
+	constructor(page: Page) {
 		this.page=page;
 		this.uploadBtn = this.page.locator('label[for="uploadFile"]');
     
