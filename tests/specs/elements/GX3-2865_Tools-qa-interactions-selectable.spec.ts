@@ -1,5 +1,5 @@
 import type { Locator } from '@playwright/test';
-import{ expect, test } from '@playwright/test';
+import{ expect, test } from '@TestBase';
 import { ListPOM } from '@pages/iñakibustosPOM';
 
 test.describe('GX3-2865 ToolsQA | Interactions | Selectable',() => {

@@ -1,4 +1,4 @@
-import { test,expect } from '@playwright/test';
+import { test,expect } from '@TestBase';
 import { DownloadPage, UploadPage } from '@pages/iñakibustosGX3-3006';
 
 let downloadPage: DownloadPage;

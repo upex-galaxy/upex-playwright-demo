@@ -1,6 +1,4 @@
-import type { Page } from '@playwright/test';
-import { test,expect } from '@playwright/test';
-let page:Page;
+import { test,expect } from '@TestBase';
 
 test.describe('GX3-2831 | TS: ⚡️ToolsQA | Elements | Buttons',() => {
 	test.beforeEach(async ({ page }) => {

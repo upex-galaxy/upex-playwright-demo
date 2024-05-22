@@ -1,4 +1,3 @@
-import type{ Page } from '@playwright/test';
 import { test, expect } from '@TestBase';
 import data from '@data/iñakibustosUserDetail.json' assert { type: 'json' };
 
