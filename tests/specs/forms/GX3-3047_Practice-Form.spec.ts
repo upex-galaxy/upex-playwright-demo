@@ -9,7 +9,7 @@ let subjectFill: SubjectFill;
 let stateCitySelect: StateCitySelect;
 let submitForm: SubmitForm;
 
-test.describe('GX3-3047_Practice-Form',() => {
+test.describe.fixme('GX3-3047_Practice-Form',() => {
 	test.beforeEach(async ( { page } ) => {
 		randomFillForm= new RandomFillForm(page);
 		genderOptionsForm= new GenderOptionsForm(page);

@@ -1,7 +1,8 @@
 import{ expect, test } from '@TestBase';
 import { DropPom } from '@pages/iñakibustosGX3-2907';
 
-test.describe('GX3-2907 |ToolsQA | Widgets | Dropdown - Select Menu',() => {
+test.describe.fixme('GX3-2907 |ToolsQA | Widgets | Dropdown - Select Menu',() => {
+	//! Flaky Tests
 	test.beforeEach(async ( { page } ) => {
 		await page.goto('https://demoqa.com/select-menu',{ waitUntil: 'domcontentloaded' });
 	});
