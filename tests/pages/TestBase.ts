@@ -4,10 +4,10 @@ import { SpaceLoginPage } from './SpaceLoginPage';
 import { SpaceProductPage } from './SpaceProductPage';
 import { SpaceCheckoutPage } from './SpaceCheckoutPage';
 import { OrangeLoginPage } from './OrangeLoginPage';
-
 import { fileURLToPath } from 'url';
 import path, { dirname, resolve } from 'path';
-
+import * as dotenv from 'dotenv';
+dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = resolve(__dirname, '../../');
@@ -27,10 +27,7 @@ const test = driver.extend<{
 			`--disable-extensions-except=${pathToExtension}`,
 			`--load-extension=${pathToExtension}`,	
 		];
-		if (process.env.CI) { 
-			chromeArgs.push('--headless=new'); //? By default, Chrome's headless mode in Playwright does not support Chrome extensions. To overcome this limitation, you can run Chrome's persistent context with a new headless mode by using this code line.
-			console.log('🚀 Running in CI');
-		}
+		if (process.env.CI) chromeArgs.push('--headless=new'); //? By default, Chrome's headless mode in Playwright does not support Chrome extensions. To overcome this limitation, you can run Chrome's persistent context with a new headless mode by using this code line.
 		const context = await chromium.launchPersistentContext('', {
 			headless: false, // required for extensions
 			args: chromeArgs,
