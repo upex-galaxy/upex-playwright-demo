@@ -27,13 +27,17 @@ const test = driver.extend<{
 			`--disable-extensions-except=${pathToExtension}`,
 			`--load-extension=${pathToExtension}`,	
 		];
-		if (process.env.CI) chromeArgs.push('--headless=new'); //? By default, Chrome's headless mode in Playwright does not support Chrome extensions. To overcome this limitation, you can run Chrome's persistent context with a new headless mode by using this code line.
+		if (process.env.CI) { 
+			chromeArgs.push('--headless=new'); //? By default, Chrome's headless mode in Playwright does not support Chrome extensions. To overcome this limitation, you can run Chrome's persistent context with a new headless mode by using this code line.
+			console.log('🚀 Running in CI');
+		}
 		const context = await chromium.launchPersistentContext('', {
 			headless: false, // required for extensions
 			args: chromeArgs,
 		});
 		const extensionPage = await context.waitForEvent('page');
 		await expect(extensionPage.locator('h1')).toContainText('AdBlock');
+		console.log('✅ Extension loaded successfully');
 		await extensionPage.close();
 		await use(context);
 		await context.close();
