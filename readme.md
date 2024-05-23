@@ -59,6 +59,14 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
     - este script de yarn `pw:install` ejecuta => "npx playwright install --with-deps chromium firefox msedge"
     - si estás usando un sistema operativo no soportado por Playwright, necesitarás realizar la instalación con la Extensión.
 
+4. **❗ASEGURATE de tener la Extensión "AdBlock" en el directorio "extension" del proyecto**. 
+    - La extensión "AdBlock" ya estará descargada automaticamente en este repo bajo la ruta: `.../upex-playwright-demo/extension/adBlock`
+    - NOTA: Es necesario hacer esto para que puedas trabajar tranquilamente con DemoQA (y no te parezca los anuncios que te provocan errores de performance)
+    - AHORA, cuando trabajes con demoqa, intenta importar "test" con @TestBase en lugar de @playwright/test Debido a que la solución del adbBlack está configurada explícitamente en el proyecto. Entonces en cada archivo de prueba harías algo como:
+        ```typescript
+        import { test, expect } from '@TestBase'; 
+        ```
+
 4. **🧪 Corre toda la Regresión de Pruebas para Verificar**:
     ```
     yarn regression

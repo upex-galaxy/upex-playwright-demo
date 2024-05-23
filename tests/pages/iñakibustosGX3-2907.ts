@@ -1,6 +1,6 @@
-import{Page,Locator} from '@playwright/test';
+import type{ Page,Locator } from '@playwright/test';
 
-export class DropPom{
+export class DropPom {
 	page:Page;
 	
 	selectValue1:()=>Locator;
@@ -18,7 +18,6 @@ export class DropPom{
 	selectOne6:()=>Locator;
 
 	oldStyleSelect1:()=>Locator;
-	
 
 	multiSelectDrop1:()=>Locator;
 	multiSelectDrop2:()=>Locator;
@@ -30,80 +29,67 @@ export class DropPom{
 	standardMultiselect3:()=>Locator;
 	standardMultiselect4:()=>Locator;
 
-//comento los elementos para los TCs con el fin de encontrar el origen del bucle
+	//comento los elementos para los TCs con el fin de encontrar el origen del bucle
 
-	constructor (driver:Page){
+	constructor(driver:Page) {
 		
 		this.page=driver;
-
 		
-		this.selectValue1= ()=> this.page.getByText('Group 1, option 1',{exact:true});
-		this.selectValue2= ()=> this.page.getByText('Group 1, option 2',{exact:true});
-		this.selectValue3= ()=> this.page.getByText('Group 2, option 1',{exact:true});
-		this.selectValue4= ()=> this.page.getByText('Group 2, option 2',{exact:true});
-		this.selectValue5= ()=> this.page.getByText('A root option',{exact:true});
-		this.selectValue6= ()=> this.page.getByText('Another root option',{exact:true});
+		this.selectValue1= () => this.page.getByText('Group 1, option 1',{ exact:true });
+		this.selectValue2= () => this.page.getByText('Group 1, option 2',{ exact:true });
+		this.selectValue3= () => this.page.getByText('Group 2, option 1',{ exact:true });
+		this.selectValue4= () => this.page.getByText('Group 2, option 2',{ exact:true });
+		this.selectValue5= () => this.page.getByText('A root option',{ exact:true });
+		this.selectValue6= () => this.page.getByText('Another root option',{ exact:true });
 		
-		this.selectOne1= ()=> this.page.getByText('Dr.', { exact: true });
-		this.selectOne2= ()=> this.page.getByText('Mr.', { exact: true });
-		this.selectOne3= ()=> this.page.getByText('Mrs.', { exact: true });
-		this.selectOne4= ()=> this.page.getByText('Ms.', { exact: true });
-		this.selectOne5= ()=> this.page.getByText('Prof.', { exact: true });
-		this.selectOne6= ()=> this.page.getByText('Other', { exact: true });
+		this.selectOne1= () => this.page.getByText('Dr.', { exact: true });
+		this.selectOne2= () => this.page.getByText('Mr.', { exact: true });
+		this.selectOne3= () => this.page.getByText('Mrs.', { exact: true });
+		this.selectOne4= () => this.page.getByText('Ms.', { exact: true });
+		this.selectOne5= () => this.page.getByText('Prof.', { exact: true });
+		this.selectOne6= () => this.page.getByText('Other', { exact: true });
 
+		this.oldStyleSelect1= () => this.page.locator('#oldSelectMenu');
 
-
-		this.oldStyleSelect1= ()=> this.page.locator('#oldSelectMenu');
-
-
-		this.multiSelectDrop1= ()=> this.page.locator('#react-select-4-option-0');
-		this.multiSelectDrop2= ()=> this.page.locator('#react-select-4-option-1');
-		this.multiSelectDrop3= ()=> this.page.locator('#react-select-4-option-2');
-		this.multiSelectDrop4= ()=> this.page.locator('#react-select-4-option-3');
-
-
+		this.multiSelectDrop1= () => this.page.locator('#react-select-4-option-0');
+		this.multiSelectDrop2= () => this.page.locator('#react-select-4-option-1');
+		this.multiSelectDrop3= () => this.page.locator('#react-select-4-option-2');
+		this.multiSelectDrop4= () => this.page.locator('#react-select-4-option-3');
 		
-		this.standardMultiselect1= ()=> this.page.getByText('Volvo')
-		this.standardMultiselect2= ()=> this.page.getByText('Saab')
-		this.standardMultiselect3= ()=> this.page.getByText('Opel')
-		this.standardMultiselect4= ()=> this.page.getByText('Audi')
+		this.standardMultiselect1= () => this.page.getByText('Volvo');
+		this.standardMultiselect2= () => this.page.getByText('Saab');
+		this.standardMultiselect3= () => this.page.getByText('Opel');
+		this.standardMultiselect4= () => this.page.getByText('Audi');
 		
 	}
 
-	async clickRandomSelectValue(){
+	async clickRandomSelectValue() {
 		await this.clickRandomOption(this.selectValue1, this.selectValue2,this.selectValue3,this.selectValue4,this.selectValue5,this.selectValue6);
 		
 	}
-	async clickRandomSelectOne(){
+	async clickRandomSelectOne() {
 		await this.clickRandomOption(this.selectOne1, this.selectOne2, this.selectOne3, this.selectOne4, this.selectOne5, this.selectOne6);
 	}
-	async clickMultiSelectDrop(){
+	async clickMultiSelectDrop() {
 		await this.multiSelectDrop1().click();
 		await this.multiSelectDrop2().click();
 		await this.multiSelectDrop3().click();
 		await this.multiSelectDrop4().click();
 	}
-	async clickRandomStdMultiSelect(){
-		await this.clickRandomOption(this.standardMultiselect1, this.standardMultiselect2, this.standardMultiselect3, this.standardMultiselect4)
+	async clickRandomStdMultiSelect() {
+		await this.clickRandomOption(this.standardMultiselect1, this.standardMultiselect2, this.standardMultiselect3, this.standardMultiselect4);
 	}
-	
 
-	async clickRandomOldSelect(){
+	async clickRandomOldSelect() {
 		await this.oldStyleSelect1().selectOption('5');
 	}
 	
-	
-
-	
 	private async clickRandomOption(...options: (() => Locator)[]) {
-    const randomIndex = Math.floor(Math.random() * options.length);
+		const randomIndex = Math.floor(Math.random() * options.length);
     
-	const randomLocator = options[randomIndex]();
-	await randomLocator.click();
-	
-	
+		const randomLocator = options[randomIndex]();
+		await randomLocator.click();
     
 	}
-
 
 }

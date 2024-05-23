@@ -2,8 +2,6 @@ import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 // See https://github.com/motdotla/dotenv
 dotenv.config();
-// Example using Setup/TearDown Precondition: https://playwright.dev/docs/test-global-setup-teardown
-export const STORAGE_STATE = 'tests/helper/auth/user.json';
 
 // See https://playwright.dev/docs/test-configuration.
 export default defineConfig({
@@ -53,10 +51,6 @@ export default defineConfig({
 	/* Configure projects for major browsers */
 	projects: [
 		{
-			name: 'setup',
-			testMatch: /.*\.(test)\.(setup)\.(js|ts)/,
-		},
-		{
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'], channel: 'chrome' },
 		},
@@ -74,24 +68,8 @@ export default defineConfig({
 		// 	name: 'iphone',
 		// 	use: { ...devices['iPhone 14 Pro'] },
 		// },
-		{
-			name: 'super-precondition-example',
-			testMatch: /.*\.(test)\.(prc)\.(js|ts)/,
-			use: { 
-				...devices['Desktop Chrome'], 
-				channel: 'chrome', 
-				storageState: STORAGE_STATE,
-			},
-			dependencies: ['setup'],
-		},
 	],
 
 	/* Folder for test artifacts such as screenshots, videos, traces, etc. */
 	outputDir: 'test-results/',
-
-	/* Run your local dev server before starting the tests */
-	// webServer: {
-	//   command: 'npm run start',
-	//   port: 3000,
-	// },
 });
