@@ -21,22 +21,23 @@ const test = driver.extend<{
 }>({
 	// eslint-disable-next-line no-empty-pattern
 	context: async ({ }, use) => {
-		// This is an example of how to use an extension in the browser context.
-		if (!process.env.CI) { //? Esto es para que no se ejecute en el CI.
-			const pathToExtension = path.join(rootDir, 'extension/adblock');
-			const context = await chromium.launchPersistentContext('', {
-				headless: false,
-				args: [
-					`--disable-extensions-except=${pathToExtension}`,
-					`--load-extension=${pathToExtension}`,	
-				],
-			});
-			const extensionPage = await context.waitForEvent('page');
-			await expect(extensionPage.locator('h1')).toContainText('AdBlock');
-			await extensionPage.close();
-			await use(context);
-			await context.close();
-		}
+		//? This is an example of how to use an extension in the browser context.
+		const pathToExtension = path.join(rootDir, 'extension/adblock');
+		const chromeArgs = [
+			`--disable-extensions-except=${pathToExtension}`,
+			`--load-extension=${pathToExtension}`,	
+		];
+		if (process.env.CI) chromeArgs.push('--headless=new'); //? By default, Chrome's headless mode in Playwright does not support Chrome extensions. To overcome this limitation, you can run Chrome's persistent context with a new headless mode by using this code line.
+		const context = await chromium.launchPersistentContext('', {
+			headless: false, // required for extensions
+			args: chromeArgs,
+		});
+		const extensionPage = await context.waitForEvent('page');
+		await expect(extensionPage.locator('h1')).toContainText('AdBlock');
+		await extensionPage.close();
+		await use(context);
+		await context.close();
+		//! NOTE: Using this TestBase in your Tests, you CANNOT run your tests in headless mode anymore, just on CI. 
 	},
 	orangeLoginPage: async ({ page }, use) => await use(new OrangeLoginPage(page)),
 	loginPage: async ({ page }, use) => await use(new SpaceLoginPage(page)),
