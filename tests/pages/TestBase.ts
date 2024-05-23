@@ -21,19 +21,22 @@ const test = driver.extend<{
 }>({
 	// eslint-disable-next-line no-empty-pattern
 	context: async ({ }, use) => {
-		const pathToExtension = path.join(rootDir, 'extension/adblock');
-		const context = await chromium.launchPersistentContext('', {
-			headless: false,
-			args: [
-				`--disable-extensions-except=${pathToExtension}`,
-				`--load-extension=${pathToExtension}`,	
-			],
-		});
-		const extensionPage = await context.waitForEvent('page');
-		await expect(extensionPage.locator('h1')).toContainText('AdBlock');
-		await extensionPage.close();
-		await use(context);
-		await context.close();
+		// This is an example of how to use an extension in the browser context.
+		if (!process.env.CI) { //? Esto es para que no se ejecute en el CI.
+			const pathToExtension = path.join(rootDir, 'extension/adblock');
+			const context = await chromium.launchPersistentContext('', {
+				headless: false,
+				args: [
+					`--disable-extensions-except=${pathToExtension}`,
+					`--load-extension=${pathToExtension}`,	
+				],
+			});
+			const extensionPage = await context.waitForEvent('page');
+			await expect(extensionPage.locator('h1')).toContainText('AdBlock');
+			await extensionPage.close();
+			await use(context);
+			await context.close();
+		}
 	},
 	orangeLoginPage: async ({ page }, use) => await use(new OrangeLoginPage(page)),
 	loginPage: async ({ page }, use) => await use(new SpaceLoginPage(page)),
