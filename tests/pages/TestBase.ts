@@ -6,6 +6,7 @@ import { SpaceCheckoutPage } from './SpaceCheckoutPage';
 import { OrangeLoginPage } from './OrangeLoginPage';
 import { fileURLToPath } from 'url';
 import path, { dirname, resolve } from 'path';
+import fs from 'fs';
 import * as dotenv from 'dotenv';
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -23,6 +24,7 @@ const test = driver.extend<{
 	context: async ({ }, use) => {
 		//? This is an example of how to use an extension in the browser context.
 		const pathToExtension = path.join(rootDir, 'extension/adblock');
+		fs.existsSync(pathToExtension) || console.error('❌ Extension not found');
 		const chromeArgs = [
 			`--disable-extensions-except=${pathToExtension}`,
 			`--load-extension=${pathToExtension}`,	
