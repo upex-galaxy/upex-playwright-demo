@@ -7,16 +7,14 @@ test.describe('TS:GX3-3334 elementsButtons', () => {
 
 	test('TC1: Validar poder hacer doble click en button: "Double Click Me".', async ({ page }) => {
 		await page.goto('/buttons');
-		//await page.locator('[class="text-center"]').waitFor({ state: 'visible' });
-		//await page.waitForTimeout(1000);
+		await page.waitForTimeout(1000);
 		const clickDobleBtt = page.getByRole('button', { name: 'Double Click Me' });
 		await clickDobleBtt.dblclick();
 		await expect(page.locator('p')).toHaveText('You have done a double click'); // como no hardcodear cualquier tipo de texto!!!
 	});
 	test('TC2: Validar poder hacer click derecho en button: "Right Click Me".', async ({ page }) => {
 		await page.goto('/buttons');
-		//await page.getByRole('button', { name: 'Right Click Me' }).waitFor({ state: 'visible' });
-		//await page.waitForTimeout(1000);
+		await page.waitForTimeout(1000);
 		const clickRightBtt = page.getByRole('button', { name: 'Right Click Me' });
 		await clickRightBtt.click({ button: 'right' });
 		const textRightBtt = await page.locator('#rightClickMessage').textContent();
@@ -24,8 +22,7 @@ test.describe('TS:GX3-3334 elementsButtons', () => {
 	});
 	test('TC3: Validar poder hacer click izquierdo en button: "Click Me".', async ({ page }) => {
 		await page.goto('/buttons');
-		//await page.waitForTimeout(1000);
-		//await page.locator('.text-center').waitFor({ state: 'visible' });
+		await page.waitForTimeout(1000);
 		const bttnClick = page.getByRole('button', { name: 'Click Me', exact: true });
 		await bttnClick.click();
 		const textButton = page.locator('#dynamicClickMessage');
