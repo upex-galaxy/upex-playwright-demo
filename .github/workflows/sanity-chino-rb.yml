@@ -2,7 +2,8 @@ name: 🧪Pipeline CHINO SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['test/GX3-3378-elements-radio-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['test/GX3-3378-elements-radio-buttons']
+  workflow_dispatch:
 
 jobs:
   TestSuite:
