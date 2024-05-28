@@ -2,8 +2,6 @@ import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 // See https://github.com/motdotla/dotenv
 dotenv.config();
-// Example using Setup/TearDown Precondition: https://playwright.dev/docs/test-global-setup-teardown
-export const STORAGE_STATE = 'tests/helper/auth/user.json';
 
 // See https://playwright.dev/docs/test-configuration.
 export default defineConfig({
