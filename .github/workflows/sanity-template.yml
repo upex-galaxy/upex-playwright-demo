@@ -13,6 +13,14 @@ run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref
 on:
   push:
     branches: ['TuBranchAqui'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+  workflow_dispatch:
+    inputs:
+      testrun:
+        description: 'Test Run npx playwright test'
+        required: true
+        default: 'tests/specs/example/spacebeyond/checkout/checkout.test.ts'
+        type: string
+
 
 jobs:
   TestSuite:
@@ -31,23 +39,56 @@ jobs:
       uses: oven-sh/setup-bun@v1
 
     - name: 🧬 Install Project Dependencies
-      run: |
-        bun install
+      run: bun install
 
     - name: 🎭️ Installing Playwright And Browsers
-      run: |
-        bun run pw:install
+      run: bun run pw:install
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        bun run test:ci tests/elements/uploadDownload_example.test.ts
+        bun run test:ci ${{ github.event.inputs.testrun }}
 
-    - name: 📊Generate Allure Report
-      run: |
-        bun run allure:open
+    #* ------------------------------------
+    - name: 📊 Get Allure Report History
+      uses: actions/checkout@v4
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages #? the branch used for the GitHub Pages content.
+        path: gh-pages #? an arbitrary name for a directory to which the previous data will be saved.
+
+    - name: 📊 Build Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        gh_pages: gh-pages #? the directory name to which the previous data was downloaded. Must be the same as the path value from the Get Allure Report History step
+        subfolder: sanity
+        allure_results: allure-results #? path to the current test results directory
+        allure_report: allure-report
+        allure_history: allure-history
+        keep_reports: 10
+
+    - name: 📡 Upload Artifact - Allure Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: sanity-allure-report
+        path: allure-history
+        retention-days: 15
+
+    - name: 🚀 Deploy Allure Report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages #? the branch used for the GitHub Pages content.
+        publish_dir: allure-history #? the directory to be published. Must be the same as the allure_history value from the Build Allure Report step
+        destination_dir: sanity
+        keep_files: true
+    #* ------------------------------------
 
     - name: ✅Import Test Results to Xray
-      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
+      if: always()
       uses: mikepenz/xray-action@v3
       with:
         username: ${{secrets.XRAY_CLIENT_ID}}
@@ -60,16 +101,8 @@ jobs:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
         XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
-    - name: 📡Upload Artifact - Allure Report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: test-report
-        path: allure-report
-        retention-days: 15
-
     - name: 🔔Slack Notification of Done
-      if: env.SLACK_WEBHOOK != ''
+      if: always()
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

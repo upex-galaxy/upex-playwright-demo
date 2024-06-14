@@ -45,18 +45,42 @@ jobs:
       run: |
         bun run regression:${{ matrix.browser }}
 
-    - name: 📊Generate Allure Report for ${{ matrix.browser }}
+    #* ------------------------------------
+    - name: 📊 Get Allure Report History
+      uses: actions/checkout@v4
       if: always()
-      run: |
-        bun run allure:gen:${{ matrix.browser }}
+      continue-on-error: true
+      with:
+        ref: gh-pages #? the branch used for the GitHub Pages content.
+        path: gh-pages #? an arbitrary name for a directory to which the previous data will be saved.
 
-    - name: 📡Upload Artifact - Allure Report for ${{ matrix.browser }}
-      uses: actions/upload-artifact@v4
+    - name: 📊 Build Allure Report
+      uses: simple-elf/allure-report-action@master
       if: always()
       with:
-        name: allure-${{ matrix.browser }}-report
-        path: allure-report/${{ matrix.browser }}
+        gh_pages: gh-pages #? the directory name to which the previous data was downloaded. Must be the same as the path value from the Get Allure Report History step
+        allure_results: allure-results #? path to the current test results directory
+        allure_report: allure-report
+        allure_history: allure-history
+        keep_reports: 10
+
+    - name: 📡 Upload Artifact - Allure Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.browser }}-allure-report
+        path: allure-history
         retention-days: 15
+
+    - name: 🚀 Deploy Allure Report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages #? the branch used for the GitHub Pages content.
+        publish_dir: allure-history #? the directory to be published. Must be the same as the allure_history value from the Build Allure Report step
+        keep_files: true
+    #* ------------------------------------
 
     - name: 📡Upload Artifact - Test Reports for ${{ matrix.browser }}
       uses: actions/upload-artifact@v4
@@ -79,7 +103,7 @@ jobs:
         fi
 
     - name: ✅Import Test Results to Xray TX -- ${{ env.TXID }} (${{ matrix.browser }})
-      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
+      if: always()
       uses: mikepenz/xray-action@v3
       with:
         username: ${{secrets.XRAY_CLIENT_ID}}
