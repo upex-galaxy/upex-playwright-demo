@@ -61,7 +61,7 @@ jobs:
       uses: simple-elf/allure-report-action@master
       if: always()
       with:
-        gh_pages: gh-pages #? the directory name to which the previous data was downloaded. Must be the same as the path value from the Get Allure Report History step
+        gh_pages: gh-pages/sanity #? the directory name to which the previous data was downloaded. Must be the same as the path value from the Get Allure Report History step
         subfolder: sanity
         allure_results: allure-results #? path to the current test results directory
         allure_report: allure-report
