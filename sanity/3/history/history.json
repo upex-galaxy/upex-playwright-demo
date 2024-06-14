@@ -1,0 +1,1 @@
+{"11b9a2cdf4c6fe30ddf42d9ec420ff60:5bd835b0d6b1d4ada3b9f0db936e82c8":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"24a4c584b45c4aca","reportUrl":"https://upex-galaxy.github.io/upex-playwright-demo/sanity/3//#testresult/24a4c584b45c4aca","status":"passed","time":{"start":1718331605277,"stop":1718331621139,"duration":15862}}]}}
