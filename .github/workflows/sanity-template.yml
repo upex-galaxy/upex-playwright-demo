@@ -82,8 +82,8 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages #? the branch used for the GitHub Pages content.
-        publish_dir: allure-history #? the directory to be published. Must be the same as the allure_history value from the Build Allure Report step
         destination_dir: sanity
+        publish_dir: allure-history #? the directory to be published. Must be the same as the allure_history value from the Build Allure Report step
         keep_files: true
     #* ------------------------------------
 
