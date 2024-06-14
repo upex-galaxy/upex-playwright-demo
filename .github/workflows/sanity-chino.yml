@@ -1,0 +1,76 @@
+name: 🧪Pipeline Chino SanityTest Execution
+run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
+on:
+  push:
+    branches: ['test/GX3-3334-elements-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+
+jobs:
+  TestSuite:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📘 Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: 💿 Installing Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: 🍙 Bun Setup
+      uses: oven-sh/setup-bun@v1
+
+    - name: 🧬 Install Project Dependencies
+      run: |
+        bun install
+
+    - name: 🎭️ Installing Playwright And Browsers
+      run: |
+        bun run pw:install
+
+    - name: ✅ 🧪Test Suite Execution
+      run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
+        bun run test tests/specs/elements/GX3-3334_ElementsButtons.test.ts
+
+    - name: 📊Generate Allure Report
+      run: |
+        bun run allure:open
+
+    - name: ✅Import Test Results to Xray
+      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
+      uses: mikepenz/xray-action@v3
+      with:
+        username: ${{secrets.XRAY_CLIENT_ID}}
+        password: ${{secrets.XRAY_CLIENT_SECRET}}
+        testFormat: 'junit'
+        testPaths: 'test-junit-report/main-importer-report.xml'
+        testExecKey: 'GX3-3341' #!Cambiar a tu TX correspondiente.
+        projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
+      env:
+        XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
+        XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+
+    - name: 📡Upload Artifact - Allure Report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-report
+        path: allure-report
+        retention-days: 15
+
+    - name: 🔔Check if SLACK_WEBHOOK is Defined
+      if: always()
+      run: |
+        if [[ -z "${{ secrets.SLACK_WEBHOOK }}" ]]; then
+          echo "SLACK_WEBHOOK is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+
+    - name: 🔔Slack Notification of Done
+      if: env.SLACK_WEBHOOK != ''
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Ari✨
+        SLACK_MESSAGE: ':test_tube: Playwright: Test Execution is Done and updated in Jira :rocket:'
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
