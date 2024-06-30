@@ -12,7 +12,7 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['test/GX3-3956-tools-qa-interactions-sortable'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-3956-⚡️-tools-qa-interactions-sortable'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
     inputs:
       testrun:
