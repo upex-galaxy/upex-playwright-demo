@@ -95,7 +95,7 @@
 	"terminal.integrated.tabs.defaultIcon": "source-control",
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"typescript.updateImportsOnFileMove.enabled": "always",
-	"workbench.colorTheme": "Night Owl (No Italics)",
+	"workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)",
 	"workbench.iconTheme": "helium-icon-theme",
 	"workbench.settings.editor": "json",
 	"workbench.tree.enableStickyScroll": true,
