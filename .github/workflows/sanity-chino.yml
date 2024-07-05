@@ -2,7 +2,7 @@ name: 🧪Pipeline Chino SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['test/GX3-3334-elements-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['test/GX3-3911-elements-text-box-fill-form-and-submit'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
@@ -30,7 +30,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        bun run test tests/specs/elements/GX3-3334_ElementsButtons.test.ts
+        bun run test tests/specs/elements/GX3-3911_Elements_text_box_fill_form_and_submit.test.ts
 
     - name: 📊Generate Allure Report
       run: |
@@ -44,7 +44,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-3341' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-3918' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}

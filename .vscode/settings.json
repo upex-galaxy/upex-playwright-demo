@@ -96,7 +96,7 @@
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"typescript.updateImportsOnFileMove.enabled": "always",
 	"workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)",
-	"workbench.iconTheme": "seti-extended",
+	"workbench.iconTheme": "material-icon-theme",
 	"workbench.settings.editor": "json",
 	"workbench.tree.enableStickyScroll": true,
 	"[github-actions-workflow]": {
