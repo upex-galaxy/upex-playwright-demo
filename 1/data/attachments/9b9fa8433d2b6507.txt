@@ -1,0 +1,15 @@
+✅ Extension loaded successfully
+Orden inicial: [
+  'One',   'Two',
+  'Three', 'Four',
+  'Five',  'Six',
+  'Seven', 'Eight',
+  'Nine'
+]
+Orden final: [
+  'Two',   'Three',
+  'One',   'Four',
+  'Five',  'Six',
+  'Seven', 'Eight',
+  'Nine'
+]
