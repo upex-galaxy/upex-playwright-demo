@@ -1,0 +1,2 @@
+✅ Extension loaded successfully
+El campo de prompt está vacío.

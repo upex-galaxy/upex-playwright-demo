@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Jul 09 13:19:02 GMT 2024","Tue Jul 09 13:19:08 GMT 2024","6137","chromium","specs/elements/GX3-4023_tools-qa-widgets-slider.spec.ts","GX3-4023 ⚡️ToolsQA | Widgets | Slider","","","TC2: Validar que el control deslizante tiene un rango de 0 a 100",""
+"passed","Tue Jul 09 13:19:08 GMT 2024","Tue Jul 09 13:19:14 GMT 2024","6353","chromium","specs/elements/GX3-4023_tools-qa-widgets-slider.spec.ts","GX3-4023 ⚡️ToolsQA | Widgets | Slider","","","TC3: Validar que el valor de salida del control deslizante se actualiza correctamente al arrastrar el botón",""
+"passed","Tue Jul 09 13:18:43 GMT 2024","Tue Jul 09 13:19:02 GMT 2024","18784","chromium","specs/elements/GX3-4023_tools-qa-widgets-slider.spec.ts","GX3-4023 ⚡️ToolsQA | Widgets | Slider","","","TC1: Validar que el control deslizante tiene un valor original de 25",""

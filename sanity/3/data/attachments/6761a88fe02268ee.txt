@@ -1,0 +1,44 @@
+Error waiting for prompt result text: locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('#promptResult') to be visible
+
+    at AlertPage.getPromptResultText (/home/runner/work/upex-playwright-demo/upex-playwright-demo/tests/pages/AlertsPage.ts:68:32)
+    at /home/runner/work/upex-playwright-demo/upex-playwright-demo/tests/specs/elements/GX3-4049_ToolQA-Alert-Frame-Window-Alerts.spec.ts:95:38 {
+  name: 'TimeoutError',
+  [Symbol(step)]: {
+    stepId: 'pw:api@16',
+    location: {
+      file: '/home/runner/work/upex-playwright-demo/upex-playwright-demo/tests/pages/AlertsPage.ts',
+      line: 68,
+      column: 32,
+      function: 'AlertPage.getPromptResultText'
+    },
+    category: 'pw:api',
+    title: 'locator.waitFor(#promptResult)',
+    apiName: 'locator.waitFor',
+    params: {
+      selector: '#promptResult',
+      strict: true,
+      omitReturnValue: true,
+      state: 'visible',
+      timeout: 10000
+    },
+    wallTime: 1720638674569,
+    laxParent: false,
+    boxedStack: undefined,
+    steps: [],
+    complete: [Function: complete],
+    endWallTime: 1720638684576,
+    error: {
+      message: 'TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\n' +
+        'Call log:\n' +
+        "  \x1B[2m- waiting for locator('#promptResult') to be visible\x1B[22m\n",
+      stack: 'TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\n' +
+        'Call log:\n' +
+        "  \x1B[2m- waiting for locator('#promptResult') to be visible\x1B[22m\n" +
+        '\n' +
+        '    at AlertPage.getPromptResultText (/home/runner/work/upex-playwright-demo/upex-playwright-demo/tests/pages/AlertsPage.ts:68:32)\n' +
+        '    at /home/runner/work/upex-playwright-demo/upex-playwright-demo/tests/specs/elements/GX3-4049_ToolQA-Alert-Frame-Window-Alerts.spec.ts:95:38'
+    }
+  }
+}
