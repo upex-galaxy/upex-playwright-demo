@@ -17,7 +17,7 @@ story('Login tests', () => {
 	});
 
 	test('GX3-4106 | TC2: Validar inicio de sesión fallido con credenciales inválidas', async () => {
-		await loginPage.login('invalid_user', 'invalid_password');
+		await loginPage.login('invalid_user', 'invalid-password');
 		expect(await loginPage.errorMessage.isVisible());
 		expect(await loginPage.getErrorMessage()).toContain('Epic sadface: Username and password do not match any user in this service');
 	});
