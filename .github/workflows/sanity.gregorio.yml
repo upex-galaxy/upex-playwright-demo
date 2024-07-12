@@ -12,7 +12,7 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['TGX3-4106-⚡️-automation-swag-labs-account-iniciar-sesion-y-br-de-accesos'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-4106-⚡️-automation-swag-labs-account-iniciar-sesion-y-br-de-accesos'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
     inputs:
       testrun:
