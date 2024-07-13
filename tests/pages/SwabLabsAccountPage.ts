@@ -1,6 +1,6 @@
 import { type Locator, type Page, } from '@playwright/test';
 
-//Esta es la declaracion de la clase, lapagina y los elementos que la conforman
+//Esta es la declaracion de la clase, la pagina y los elementos que la conforman
 //llamando a su locator de cada uno
 export class LoginPage {
 	readonly page: Page;
@@ -10,7 +10,7 @@ export class LoginPage {
 	readonly errorMessage: Locator;
 	readonly productsTitle: Locator;
 
-	// inicializamos cada elemento con su locator que representa en el Doim
+	// inicializamos cada elemento con su locator que representa en el Dom
 	constructor(page:Page) {
 		this.page = page;
 		this.usernameInput = page.locator('#user-name');
