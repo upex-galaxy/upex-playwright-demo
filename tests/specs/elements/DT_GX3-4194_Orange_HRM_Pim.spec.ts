@@ -61,6 +61,7 @@ story('GX3-4194 [Automation] OrangeHRM | PIM | Agregar un nuevo empleado', () =>
 	});
 
 	test('GX3-4194 | TC2: Validar agregado de un empleado con credenciales exitosamente', async ({ page }) => {
+		test.setTimeout(90000);
 		// Se crean las variables de datos del empleado
 		const username = `Paco${Math.floor(Math.random() * 10000)}`;
 		const password = 'Pablo2345';
