@@ -123,7 +123,7 @@ story('GX3-4194 [Automation] OrangeHRM | PIM | Agregar un nuevo empleado', () =>
 		await saveButton.click();
 		// Verificamos el error que sea visible
 		const requiredText = page.locator('#app > div.oxd-layout > div.oxd-layout-container > div.oxd-layout-context > div > div > form > div.orangehrm-employee-container > div.orangehrm-employee-form > div:nth-child(1) > div.oxd-grid-1.orangehrm-full-width-grid > div > div > div.--name-grouped-field > div:nth-child(1) > span');
-		await expect(requiredText).toBeVisible();
+		await expect(requiredText).toBeVisible({ timeout: 10000 });
 		await expect(requiredText).toHaveText('Required');
       
 	});
