@@ -1,5 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Fri Jul 12 14:47:31 GMT 2024","Fri Jul 12 14:47:31 GMT 2024","445","chromium","specs/elements/GX3-4106_SwagLabs_Account.spec.ts","Login tests","","","GX3-4106 | TC2: Validar inicio de sesión fallido con credenciales inválidas",""
-"passed","Fri Jul 12 14:47:31 GMT 2024","Fri Jul 12 14:47:32 GMT 2024","432","chromium","specs/elements/GX3-4106_SwagLabs_Account.spec.ts","Login tests","","","GX3-4106 | TC4: Validar inicio de sesión con usuario bloqueado",""
-"passed","Fri Jul 12 14:47:25 GMT 2024","Fri Jul 12 14:47:31 GMT 2024","5165","chromium","specs/elements/GX3-4106_SwagLabs_Account.spec.ts","Login tests","","","GX3-4106 | TC1: Validar inicio de sesión exitoso",""
-"passed","Fri Jul 12 14:47:31 GMT 2024","Fri Jul 12 14:47:31 GMT 2024","419","chromium","specs/elements/GX3-4106_SwagLabs_Account.spec.ts","Login tests","","","GX3-4106 | TC3: Validar inicio de sesión fallido con campos vacíos",""
+"passed","Wed Jul 17 01:15:21 GMT 2024","Wed Jul 17 01:15:37 GMT 2024","16041","chromium","specs/widgets/GX3-4236-Dropdown-Select.test.ts","GX3-4236: Widgets | Dropdown - Select Menu","","","GX3-4237 | PW TC1: Should select value option from Select Value dropdown-type",""
