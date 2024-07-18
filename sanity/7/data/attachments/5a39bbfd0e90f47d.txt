@@ -1,0 +1,2 @@
+Initial size: width=200, height=200
+New size: width=300, height=250
