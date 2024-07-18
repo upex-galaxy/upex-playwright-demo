@@ -12,7 +12,7 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['GX3-4194-⚡️-automation-orange-hrm-pim-agregar-un-nuevo-empleado'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-4213-⚡️-tools-qa-interactions-resizable'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
     inputs:
       testrun:
@@ -46,7 +46,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        bun run test tests/specs/elements/DT_GX3-4194_Orange_HRM_Pim.spec.ts
+        bun run test tests/specs/elements/GX3-4213_ToolsQA_Interactions_Resizable.spec.ts
 
     - name: 📊 Get Allure Report History
       #* ------------------------------------
@@ -101,7 +101,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-4198' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-4220' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
