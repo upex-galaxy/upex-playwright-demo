@@ -1,0 +1,2 @@
+Is the resizable box visible: true
+Size of the resizable box: width=200, height=200
