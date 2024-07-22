@@ -12,7 +12,7 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: branches: ['GX3-4266-⚡️-automation-space-beyond-datepicker-buscar-destino-por-fecha-y-grupo-de-pasajeros'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-4266-⚡️-automation-space-beyond-datepicker-buscar-destino-por-fecha-y-grupo-de-pasajeros'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
   workflow_dispatch:
     inputs:
       testrun:
