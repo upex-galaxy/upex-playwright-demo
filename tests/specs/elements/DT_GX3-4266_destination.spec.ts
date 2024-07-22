@@ -63,7 +63,7 @@ story('GX3-4266  SpaceBeyond | Datepicker | Buscar destino por fecha y grupo de 
 			await homePage.clickSelectDestination();
 		});
 	});
-
+	//
 	test('TC4: Validar actualizar fecha de partida al seleccionar misma fecha de partida y regreso', async () => {
 		await test.step('Selecciono la fecha de partida', async () => {
 			await homePage.selectDepartureDate('26');
