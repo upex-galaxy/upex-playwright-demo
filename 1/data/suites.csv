@@ -1,2 +1,4 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Wed Jul 17 01:15:21 GMT 2024","Wed Jul 17 01:15:37 GMT 2024","16041","chromium","specs/widgets/GX3-4236-Dropdown-Select.test.ts","GX3-4236: Widgets | Dropdown - Select Menu","","","GX3-4237 | PW TC1: Should select value option from Select Value dropdown-type",""
+"passed","Wed Jul 24 22:15:37 GMT 2024","Wed Jul 24 22:15:41 GMT 2024","3061","chromium","specs/elements/GX3-4308_Elements_Buttons.test.ts","GX3-4308 | Elements | Buttons","","","4309 | TC3: Validar hacer click en button: ""Click"".",""
+"passed","Wed Jul 24 22:15:29 GMT 2024","Wed Jul 24 22:15:34 GMT 2024","4970","chromium","specs/elements/GX3-4308_Elements_Buttons.test.ts","GX3-4308 | Elements | Buttons","","","4309 | TC1: Validar hacer doble click en button: ""Double Click Me"".",""
+"passed","Wed Jul 24 22:15:34 GMT 2024","Wed Jul 24 22:15:37 GMT 2024","3125","chromium","specs/elements/GX3-4308_Elements_Buttons.test.ts","GX3-4308 | Elements | Buttons","","","4309 | TC2: Validar hacer click derecho en button: "" Right Click"".",""
