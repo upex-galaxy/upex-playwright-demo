@@ -10,9 +10,10 @@
     "test:trace": "npx playwright show-trace",
     "test:debug": "npx playwright test --project=chromium --debug",
     "test": "npx playwright test --project=chromium",
-    "test:ci": "npx playwright test",
+    "ci:test": "npx playwright test -c playwright.chrome.config.ts --project=chromium",
     "regression:chrome": "npx playwright test -c playwright.chrome.config.ts --project=chromium",
-    "regression:ci": "npx playwright test --workers=4",
+    "ci:regression": "npx playwright test -c playwright.chrome.config.ts --project=chromium --workers=4",
+    "ci:smoke": "npx playwright test -c playwright.chrome.config.ts --project=chromium tests/specs/example/spacebeyond/checkout/checkout.test.ts",
     "show:report:chrome": "npx playwright show-report test-html-report/chrome",
     "clean:reports": "rm -rf test-results && rm -rf test-junit-report && rm -rf test-html-report && rm -rf allure-results",
     "allure:open": "allure generate --clean",
@@ -21,7 +22,8 @@
     "prettier:check": "npx prettier --check tests/**/*.ts",
     "prettier:fix": "npx prettier --write tests/**/*.ts",
     "lint:check": "npx eslint tests/**/*.ts",
-    "lint:fix": "npx eslint --fix tests/**/*.ts"
+    "lint:fix": "npx eslint --fix tests/**/*.ts",
+	"check:ts": "tsc --noEmit"
   },
   "keywords": [
     "playwright"
