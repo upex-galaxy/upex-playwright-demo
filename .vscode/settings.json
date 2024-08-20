@@ -116,7 +116,7 @@
 		"tsconfig.eslint.json": "eslint",
 		"modules.d.ts": "typescript",
 		"regression.yml": "test-ts",
-		"sanity-template.yml": "test-ts",
+		"sanityTest.yml": "test-ts",
 		"playwright.chrome.config.ts": "playwright",
 		"playwright.firefox.config.ts": "playwright",
 		"playwright.edge.config.ts": "playwright",
