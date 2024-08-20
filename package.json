@@ -21,8 +21,8 @@
     "allure:report": "npm run allure:open && allure open --host localhost --port 7070",
     "prettier:check": "npx prettier --check tests/**/*.ts",
     "prettier:fix": "npx prettier --write tests/**/*.ts",
-    "lint:check": "npx eslint tests/**/*.ts",
-    "lint:fix": "npx eslint --fix tests/**/*.ts",
+    "eslint:check": "npx eslint tests/**/*.ts",
+    "eslint:fix": "npx eslint --fix tests/**/*.ts",
 	"check:ts": "tsc --noEmit"
   },
   "keywords": [
