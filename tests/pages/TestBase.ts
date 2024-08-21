@@ -27,7 +27,7 @@ const test = driver.extend<{
 		if (process.env.CI) chromeArgs.push('--headless=new'); //? By default, Chrome's headless mode in Playwright does not support Chrome extensions. To overcome this limitation, you can run Chrome's persistent context with a new headless mode by using this code line.
 		const context = await chromium.launchPersistentContext('', {
 			headless: false, // required for extensions
-			args: chromeArgs,
+			args: chromeArgs
 		});
 		const extensionPage = await context.waitForEvent('page');
 		await expect(extensionPage.locator('h1')).toContainText('AdBlock');
@@ -39,7 +39,7 @@ const test = driver.extend<{
 	},
 	loginPage: async ({ page }, use) => await use(new SpaceLoginPage(page)),
 	productPage: async ({ page }, use) => await use(new SpaceProductPage(page)),
-	checkoutPage: async ({ page }, use) => await use(new SpaceCheckoutPage(page)),
+	checkoutPage: async ({ page }, use) => await use(new SpaceCheckoutPage(page))
 });
 
 export { test };

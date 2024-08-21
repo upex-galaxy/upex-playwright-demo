@@ -23,7 +23,7 @@
     "prettier:fix": "npx prettier --write tests/**/*.ts",
     "eslint:check": "npx eslint tests/**/*.ts",
     "eslint:fix": "npx eslint --fix tests/**/*.ts",
-	"check:ts": "tsc --noEmit"
+    "check:ts": "tsc --noEmit"
   },
   "keywords": [
     "playwright"
@@ -43,10 +43,15 @@
     "allure-playwright": "2.9.2",
     "dotenv": "16.0.3",
     "eslint": "8.53.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-only-warn": "1.1.0",
     "eslint-plugin-prettier": "5.1.3",
     "lodash": "4.17.21",
     "prettier": "3.1.0",
+    "prettier-eslint": "^16.3.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "5.2.2"
   }
 }

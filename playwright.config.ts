@@ -14,7 +14,7 @@ export default defineConfig({
 		 * Maximum time expect() should wait for the condition to be met.
 		 * For example in `await expect(locator).toHaveText();`
 		 */
-		timeout: 5000,
+		timeout: 5000
 	},
 	// Test Matched those suites which are test.ts or spec.ts
 	testMatch: /.*(test|spec)\.(ts)/,
@@ -31,7 +31,7 @@ export default defineConfig({
 		['./tests/custom-reporter.ts'],
 		['html', { outputFolder: 'test-html-report/main', open: 'never' }],
 		['junit', { outputFolder: 'test-junit-report', outputFile: 'test-junit-report/main-importer-report.xml' }],
-		['allure-playwright'],
+		['allure-playwright']
 	],
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
@@ -45,15 +45,15 @@ export default defineConfig({
 		actionTimeout: 0,
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'retain-on-failure',
-		screenshot: 'on',
+		screenshot: 'on'
 	},
 
 	/* Configure projects for major browsers */
 	projects: [
 		{
 			name: 'chromium',
-			use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-		},
+			use: { ...devices['Desktop Chrome'], channel: 'chrome' }
+		}
 		// {
 		// 	name: 'firefox',
 		// 	use: { ...devices['Desktop Firefox'] },
@@ -71,5 +71,5 @@ export default defineConfig({
 	],
 
 	/* Folder for test artifacts such as screenshots, videos, traces, etc. */
-	outputDir: 'test-results/',
+	outputDir: 'test-results/'
 });

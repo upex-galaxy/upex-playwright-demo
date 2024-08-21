@@ -60,7 +60,7 @@ class MyReporter implements Reporter {
 			testID: test.id,
 			testNumber: testNumber,
 			testName: test.title,
-			testWorker: testWorker,
+			testWorker: testWorker
 		};
 		this.testResults.push(testData);
 	}
@@ -76,6 +76,7 @@ class MyReporter implements Reporter {
 	}
 
 	onStepEnd(test: TestCase, result: TestResult, step: TestStep) {
+		result;
 		const testRun = this.testResults.find(({ testID }) => testID === test.id);
 		if (!testRun) throw new Error('Test not found in testResults');
 		const testRunNumber = `[${testRun.testNumber}/${this.totalTests}]`;
@@ -162,6 +163,7 @@ class MyReporter implements Reporter {
 	}
 
 	onStdOut(chunk: string | Buffer, test: void | TestCase, result: void | TestResult) {
+		test;
 		console.group();
 		if (this.runningTests.length === 1) console.log(chunk);
 		if (result && result.errors.length > 0) console.log(result.errors);
@@ -169,6 +171,7 @@ class MyReporter implements Reporter {
 	}
 
 	onStdErr(chunk: string | Buffer, test: void | TestCase, result: void | TestResult): void {
+		test;
 		console.group();
 		console.log(chunk);
 		if (result && result.errors.length > 0) console.log(result.errors);
@@ -196,7 +199,7 @@ class MyReporter implements Reporter {
 			passed: allTestsPassed,
 			failed: executionFailed,
 			timedout: timedOut,
-			interrupted: interrupted,
+			interrupted: interrupted
 		};
 		console.log('\n\x1b[43m\x1b[30m%s\x1b[0m', '📊 TEST REPORT SUMMARY:', '\n');
 		console.group();
