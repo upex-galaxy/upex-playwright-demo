@@ -1,4 +1,4 @@
-import { story, precondition, test, expect } from '@pages/TestBase';
+import { story, precondition, test, expect } from '@TestBase';
 import data from '@data/chinoUserDetail.json' assert {type: 'json'};
 
 story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
@@ -126,7 +126,6 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			const resultOutput = outputView.map(item => item.split(':')[1].trim());
 			const expectedOutput = [data[7].fullName, data[7].email];
 			expect(resultOutput).toEqual(expectedOutput);
-
 		});
 
 	});

@@ -39,42 +39,55 @@
 
 Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
-# CÓMO EMPEZAR:
+# CÓMO EMPEZAR
+
 **Precondición**:
+
 - Asegúrate de usar el Gestor de Paquete "YARN" en este proyecto en lugar de npm; para un mejor rendimiento de control de dependencias.
-- Si aún no tienes instalado `yarn` en tu maquina, puedes hacerlo simplemente corriendo en la terminal: `npm i -g yarn` 
+- Si aún no tienes instalado `yarn` en tu maquina, puedes hacerlo simplemente corriendo en la terminal: `npm i -g yarn`
 
 1. **📡 Clona el Repositorio del Proyecto**:
+
     ```
     git clone https://github.com/upex-galaxy/upex-playwright-demo.git
     ```
+
 2. **❗💿 Instala todas las Dependencias del Proyecto**:
+
     ```
     yarn
     ```
+
 3. **❗💿 Instala Playwrgiht🎭️ y los Navegadores todas sus Dependencias usando Yarn**:
+
     ```
     yarn pw:install
     ```
+
     - este script de yarn `pw:install` ejecuta => "npx playwright install --with-deps chromium firefox msedge"
     - si estás usando un sistema operativo no soportado por Playwright, necesitarás realizar la instalación con la Extensión.
 
-4. **❗ASEGURATE de tener la Extensión "AdBlock" en el directorio "extension" del proyecto**. 
+4. **❗ASEGURATE de tener la Extensión "AdBlock" en el directorio "extension" del proyecto**.
     - La extensión "AdBlock" ya estará descargada automaticamente en este repo bajo la ruta: `.../upex-playwright-demo/extension/adBlock`
     - NOTA: Es necesario hacer esto para que puedas trabajar tranquilamente con DemoQA (y no te parezca los anuncios que te provocan errores de performance)
     - AHORA, cuando trabajes con demoqa, intenta importar "test" con @TestBase en lugar de @playwright/test Debido a que la solución del adbBlack está configurada explícitamente en el proyecto. Entonces en cada archivo de prueba harías algo como:
+
         ```typescript
         import { test, expect } from '@TestBase'; 
         ```
 
 4. **🧪 Corre toda la Regresión de Pruebas para Verificar**:
+
     ```
     yarn regression
     ```
+
 5. **📊 Puedes Generar siempre un Reporte de Pruebas con Allure**:
+
     ```
     yarn allure
     ```
+
 6. **❗ Recuerda ACTUALIZAR tu Repo todos los días con**:
 
     ```
@@ -90,58 +103,59 @@ Ahora el Directorio de UPEX Galaxy, será mucho más simple.
 
 ---
 
-# Command Lines para Playwright:
+# Command Lines para Playwright
 
 Opciones comunes disponibles en la línea de comando:
 
--   ### Ejecutar todas las pruebas
+- ### Ejecutar todas las pruebas
 
     `npx playwright test`
 
--   ### Ejecutar un solo archivo de prueba
+- ### Ejecutar un solo archivo de prueba
 
     `npx playwright test tests/todo-page.spec.ts`
 
--   ### Ejecutar un conjunto de archivos de prueba
+- ### Ejecutar un conjunto de archivos de prueba
 
     `npx playwright test tests/todo-page/ tests/landing-page/`
 
--   ### Ejecutar archivos que tengan my-spec o my-spec-2 en el nombre del archivo
+- ### Ejecutar archivos que tengan my-spec o my-spec-2 en el nombre del archivo
 
     `npx playwright test my-spec my-spec-2`
 
--   ### Ejecutar pruebas en la línea 42 de my-spec.ts
+- ### Ejecutar pruebas en la línea 42 de my-spec.ts
 
     `npx playwright test my-spec.ts:42`
 
--   ### Ejecutar la prueba con el título
+- ### Ejecutar la prueba con el título
 
     `npx playwright test -g "add a todo item"`
 
--   ### Ejecutar pruebas en navegadores con cabecera
+- ### Ejecutar pruebas en navegadores con cabecera
 
     `npx playwright test --headed`
 
--   ### Ejecutar todas las pruebas contra un proyecto específico
+- ### Ejecutar todas las pruebas contra un proyecto específico
 
     `npx playwright test --project=chromium`
 
--   ### Desactivar la paralelización
+- ### Desactivar la paralelización
 
     `npx playwright test --workers=1`
 
--   ### Elija un informador
+- ### Elija un informador
 
     `npx playwright test --reporter=dot`
 
--   ### Ejecutar en modo de depuración con el inspector de Playwright
+- ### Ejecutar en modo de depuración con el inspector de Playwright
 
     `npx playwright test --debug`
 
--   ### Pida ayuda
+- ### Pida ayuda
+
     `npx playwright test --help`
 
-## TUTORIAL COMPLETO PASO A PASO CREACIÓN DE PROYECTO:
+## TUTORIAL COMPLETO PASO A PASO CREACIÓN DE PROYECTO
 
 ### LEE ESTA GUÍA: [PLAYWRIGHT AL GRANO](https://upexgalaxy9.atlassian.net/wiki/spaces/UG/pages/1083226)
 
@@ -157,6 +171,6 @@ Opciones comunes disponibles en la línea de comando:
 [typescript-logo]: https://img.shields.io/badge/TypeScript-black?logo=typescript&style=for-the-badge
 [typescript-site]: https://www.typescriptlang.org
 
-Visit https://playwright.dev/docs/intro for more information. ✨
+Visit <https://playwright.dev/docs/intro> for more information. ✨
 
 # Happy hacking! 🎭
