@@ -1,27 +1,39 @@
 <!--! MODELO STANDARD de UPEX para Testing Automation (TAUS) -->
-# 🧪 Testing Automation - Playwright (TS) 👨🏻‍🚀 CI/CD
-
-[![🧪Pipeline Regression in QA](https://github.com/upex-galaxy/upex-playwright-demo/actions/workflows/regression.yml/badge.svg)](https://github.com/upex-galaxy/upex-playwright-demo/actions/workflows/regression.yml)
-<!-- PROJECT LOGO -->
-![UPEX_Playwright](https://user-images.githubusercontent.com/91127281/215841865-9732a009-bb36-4742-a516-7c6dcf97114a.png)
+# 🧪 Testing Automation - *{AutomationFrameworkName}* 👨🏻‍🚀 CI/CD
+<!--todo: Reemplazar la variable <repo_name> con el nombre real del repo -->
+[![🧪Pipeline Regression in QA](https://github.com/upex-galaxy/<repo_name>/actions/workflows/regression.yml/badge.svg)](https://github.com/upex-galaxy/<repo_name>/actions/workflows/regression.yml)
 
 <!-- Workspace (Require-Badge) -->
 [![vscode-logo]][vscode-site]
 [![jira]][jira-docu]
 <!-- CI Tool (Require-Badge) -->
 [![github-actions]][github-actions-docu]
+<!--todo: MARKDOWN BADGES TEMPLATE (remover lo que no se usa en el repo) -->
 <!-- Programming Language -->
+[![javascript-logo]][javascript-site]
 [![typescript-logo]][typescript-site]
+[![java-logo]][java-site]
+[![python-logo]][python-site]
+[![csharp-logo]][csharp-site]
 <!-- Testing Frameworks -->
 [![playwright-logo]][playwright-docu]
+[![cypress-logo]][cypress-docu]
+[![selenium-logo]][selenium-docu]
+[![wdio-logo]][wdio-docu]
+[![k6-logo]][k6-docu]
 <!-- Package Manager -->
 [![node-logo]][node-site]
+[![gradle]][gradle-docu]
+[![Miniconda]][conda-docu]
+[![npm]][npm-docu]
+[![pnpm]][pnpm-docu]
 [![yarn]][yarn-docu]
 <!-- Integrations -->
 [![eslint]][eslint-site]
+[![grafana]][grafana-site]
 [![allure]][allure-docu]
 
-Este repositorio contiene un marco de automatización de pruebas para el proyecto **Playwright (TS)**. El marco está diseñado para ejecutar pruebas de regresión, pruebas de humo y pruebas de integración en un entorno de CI/CD. El marco de automatización está construido con las mejores prácticas y patrones de diseño para garantizar la escalabilidad, mantenibilidad y reutilización del código de prueba.
+Este repositorio contiene un marco de automatización de pruebas para el proyecto **{AutomationFrameworkName}**. El marco está diseñado para ejecutar pruebas de regresión, pruebas de humo y pruebas de integración en un entorno de CI/CD. El marco de automatización está construido con las mejores prácticas y patrones de diseño para garantizar la escalabilidad, mantenibilidad y reutilización del código de prueba.
 
 ## Requisitos para Usar el Repositorio
 
@@ -42,18 +54,46 @@ Antes de comenzar a trabajar con el repositorio, asegúrate de cumplir con los s
 3. **Instalar el Gestor de Paquetes y Dependencias**
 
    Dependiendo del framework de automatización utilizado en el repositorio, asegúrate de instalar el **Package Manager** adecuado para lenguaje de programación y framework de pruebas:
+   <!--todo: PACAKGE MANAGER TEMPLATE (remueve los fragmentos que no aplican) -->
 
    - **Para Frameworks con JavaScript/TypeScript:**
       - **Node.js**: Requerido si el proyecto utiliza frameworks como WebdriverIO, Cypress, Playwright o SeleniumJS. Instalando Node.js, obtendrás automáticamente npm como gestor de paquetes y JavaScript runtime.
          - [Instalar Node.js (Versión LTS)](https://nodejs.org/)
       - **Gestor de Paquetes Node**: Identifica cuál es el gestor de paquetes adecuado para el repositorio inspeccionando el archivo de bloqueo (`.lock`) en el directorio raíz. Esto te indicará si debes usar `npm`, `pnpm` o `yarn` para ejecutar los scripts del proyecto.
+         - **npm**: Si ves `package-lock.json`, usas `npm`.
+            - Instalación: npm viene preinstalado con Node.js.
+         - **pnpm**: Si ves `pnpm-lock.yaml`, usas `pnpm`.
+            - Instalación: `npm install -g pnpm` [tip: Por qué usar pnpm](https://pnpm.io/motivation)
          - **yarn**: Si ves `yarn.lock`, usas `yarn`.
             - Instalación: `npm install -g yarn`
          - [Ver una Comparación entre estos Gestores](https://pnpm.io/feature-comparison)
+  
+   - **Para Frameworks con Java:**
+      - **Java Development Kit (JDK)**: Requerido para proyectos Java y Selenium. Asegúrate de instalar la versión adecuada de JDK según las necesidades del proyecto.
+         - [Instalar JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+      - **SDKMAN (sdk)**: TE RECOMENDAMOS instalarlo para gestionar múltiples versiones de JDK, además de poder instalar Maven y Gradle con facilidad.
+            - [Instalar SDKMAN](https://sdkman.io/install)
+            - [Instalaciones con SDK](https://sdkman.io/sdks)
+      - **Gestor de Paquetes Java**: Dependiendo del proyecto, asegúrate de instalar el gestor de paquetes adecuado para Java:
+         - **Maven (mvn)**: Usado en proyectos Java para la gestión de dependencias y la ejecución de pruebas.
+            - [Instalar Maven](https://maven.apache.org/install.html)
+         - **Gradle (gradle)**: Alternativa a Maven, especialmente útil en proyectos más grandes o modernos.
+            - [Instalar Gradle](https://gradle.org/install/)
+         - [Ver una Comparación entre estos Gestores](https://gradle.org/maven-vs-gradle/)
+
+   - **Para Frameworks con Python:**
+      - **Miniconda**: Recomendado si el proyecto está basado en Python, permitiendo el manejo de entornos y paquetes a través de `conda`. Miniconda es una versión ligera de Anaconda.
+         - [Instalar Miniconda](https://docs.anaconda.com/miniconda/)
+      - **Conda**: Gestor de paquetes y entornos de Python. Se instala automáticamente con Miniconda.
+         - [Documentación de Conda](https://docs.conda.io/projects/conda/en/stable/user-guide/getting-started.html)
 
 4. **CLI del Framework de Automatización**
    Por último, asegúrate de instalar la CLI específica del framework de automatización utilizado en el proyecto (preferiblemente de forma global porque podrías necesitarla en diferentes proyectos):
+   <!--todo: CLI (remueve la línea que no aplica al Framework) -->
+   - **WebdriverIO**: `npm install -g @wdio/cli`
+   - **Cypress**: `npm install -g cypress`
    - **Playwright**: `npm install -g playwright`
+   - **Selenium**: La instalación de la CLI dependerá del lenguaje utilizado.
 
 ---
 
@@ -86,6 +126,7 @@ Pasos generales para comenzar a trabajar con el repositorio:
    Si el proyecto necesita variables de Ambiente, crea tu archivo `.env` en la directorio root del proyecto para guardar las variables de environment (revisa el el archivo de config del framework para ver qué necesitas) y agregarlo al `.gitignore`.
 
 5. **Conoce y ejecuta scripts del `package.json`**:
+   <!--todo: Script de Node.js (remueve este último Paso si el repo NO usa Node.js) -->
    Cada repositorio tiene scripts predefinidos para ejecutar pruebas, suites, y reportes.
    Revisa el archivo `package.json` para ver los scripts disponibles para ejecutar en la terminal.
 
@@ -325,6 +366,22 @@ Para mantener la consistencia y claridad en los repositorios de UPEX, sigue esta
 - Directorio: `.../pageobjects` o `.../pages`
 - Nomenclatura: **PascalCase** o **snake_case** según el lenguaje:
     - Para Node (JS/TS): `**Page.js` / `**Page.ts` - ejemplo: `LoginPage.ts`
+        - Estructura básica de POM en **Cypress con Typescript:**
+
+          ```typescript
+          export class LoginPage {
+            // Tipado de Elementos de la Página
+            loginButton: () => Cypress.Chainable<JQuery<HTMLButtonElement>>;
+            constructor() {
+                // Elementos de la Página
+                this.loginButton = () => cy.get('[form=login]').contains('button', 'Log in');
+            }
+            submitLogin() { // Método de Acción
+                this.loginButton().click();
+            }
+          }
+          ```
+
         - Estructura básica de POM en **Playwright con Typescript:**
 
           ```typescript
@@ -341,6 +398,62 @@ Para mantener la consistencia y claridad en los repositorios de UPEX, sigue esta
                 await this.loginButton.click();
             }
           }
+          ```
+
+        - Estructura básica de POM en **WebdriverIO con Typescript:**
+
+          ```typescript
+          import { $ } from '@wdio/globals';
+          class LoginPage {
+              // Elementos de la Página
+              get loginButton() { return $('button[type="submit"]') };
+
+              async submitLogin() { // Método de Acción
+                await this.loginButton.click();
+              }
+          }
+          export default new LoginPage();
+          ```
+
+    - Para Java: `**Page.java` - ejemplo: `LoginPage.java`
+        - Estructura básica de POM en **Selenium con Java:**
+
+          ```java
+          package e2e.pages;
+          import java.util.function.Supplier;
+          import org.openqa.selenium.WebDriver;
+          import org.openqa.selenium.WebElement;
+          import org.openqa.selenium.By;
+          public class LoginPage {
+            // Tipado de Elementos de la Página
+            private Supplier<WebElement> loginButton;
+            // * ARMAR EL CONSTRUCTOR con WebDriver (para usar sus métodos)
+            public LoginPage(WebDriver driver) {
+                // Elementos de la Página
+                this.web = driver;
+                this.loginButton = () -> this.web.findElement(By.id("login-submit"));
+            }
+            public void submitLogin() {
+                this.loginButton.get().click();
+            }
+          }
+          ```
+
+    - Para Python: `**_page.py` - ejemplo: `login_page.py`
+        - Estructura básica de POM en **Selenium con Python:**
+
+          ```python
+          from selenium.webdriver.remote.webdriver import WebDriver
+          from selenium.webdriver.common.by import By
+          class LoginPage:
+            # * ARMAR EL CONSTRUCTOR con WebDriver (para usar sus métodos)
+            def __init__(self, driver: WebDriver):
+                # Elementos de la Página
+                self.web = driver
+                self.submitButton = lambda: self.web.find_element(By.ID, "login-submit")
+
+            def submit_login(self):
+                self.submitButton().click()
           ```
 
 > [!TIP]
@@ -360,9 +473,38 @@ Para mantener la consistencia y claridad en los repositorios de UPEX, sigue esta
 
 - Directorio: `test/utils`
 - Definición de cada Módulo de Utilidad de Prueba:
-    - **Locators**: Métodos para localizar elementos de la página.
-    - **Actions**: Métodos para realizar acciones en la página.
-    - **Assertions**: Métodos para validar resultados y estados de la página.
+    - **"Locators"**: para crear y definir métodos estratégicos localización de elementos (de nomenclatura "getBy") para simplificar el uso de selectores del Framework. Ejemplos (más comunes):
+        - `getBySelector()`
+        - `getByXpath()`
+        - `getByTestId()`
+        - `getByRole()`
+        - `getByText()`
+        - `getByContainingText()`
+        - `getChild(element).withinParent(element)`
+        - `getParent(element).givenChild(element)`
+        - `getNext(element).fromSibling(element)`
+        - `getPrevious(element).fromSibling(element)`
+        - `getTableData()`
+    - **"Actions"**: para definir métodos complejos de interacción con los elementos de la página. Ejemplos (más comunes):
+        - `dropdownSelect(element, option)`
+        - `fillForm(formObject)`
+        - `dragAndDrop(element, target)`
+        - `hoverOver(element)`
+        - `uploadFile(element, file)`
+        - `downloadFile(element)`
+        - `waitForElement(element)`
+        - `waitUntil(condition)`
+    - **"Assertions"**: para definir métodos de validación y comprobación de los elementos de la página. Ejemplos (más comunes):
+        - `should(element).beVisible()`
+        - `should(element).beHidden()`
+        - `should(element).haveText(text)`
+        - `should(element).haveValue(value)`
+        - `should(element).haveAttribute(attribute, value)`
+        - `should(element).haveClass(className)`
+        - `should(element).beEnabled()`
+        - `should(element).beDisabled()`
+        - `should(element).beChecked()`
+- Estos módulos de utilidad son esenciales para mantener un código de prueba limpio, reutilizable y fácil de mantener.
 
 > [!NOTE]
 > Los Frameworks modernos como Cypress, Playwright y WebdriverIO tienen métodos y funciones integradas para realizar estas acciones y validaciones, por lo que no es necesario crear módulos de utilidad personalizados a menos que sea necesario para métodos específicos que no estén disponibles en el Framework o requiera más personalización situacional.
@@ -372,7 +514,28 @@ Para mantener la consistencia y claridad en los repositorios de UPEX, sigue esta
 - **Técnica "TestBase"**:
     - Definición: *Es una técnica común en los frameworks de automatización de pruebas, que consiste en tener un archivo que contiene todos los PageObjects y funciones de utilidad para importarlo en cada archivo de prueba y acceder a los POM y utilidades con mayor facilidad.*
     - Directorio: *Este archivo se puede ubicar en cualquier directorio específico, pero se recomienda en el directorio raíz de pruebas.*
-    - Para Node (JS/TS): `/TestBase.ts` (Playwright/WebdriverIO)
+    - Para Node (JS/TS): `/TestBase.ts` (Playwright/WebdriverIO) o `/commands.ts` (Cypress)
+        - Ejemplo TestBase en **Cypress con Typescript:**
+            - *En Cypress se usa el módulo de Commands.ts como el TestBase.*
+
+            ```typescript
+            import { LoginPage } from '@pages/LoginPage';
+            import { HomePage } from '@pages/HomePage';
+
+            Cypress.Commands.add('page', () => {
+                const page = {
+                    // Se instancian los PageObjects como propiedades de objeto
+                    loginPage: new LoginPage(),
+                    homePage: new HomePage()
+                };
+                return cy.wrap(page); // Se envuelve como un objeto Cypress
+            });
+            // ---- Uso en archivo de prueba ----: 
+            it('test case name', () => {
+                cy.page().loginPage.submitLogin();
+            });
+            ```
+
         - Ejemplo TestBase en **Playwright con Typescript:**
             - *En Playwright se usa el Fixture del Context de Playwright como el TestBase.*
 
@@ -396,19 +559,118 @@ Para mantener la consistencia y claridad en los repositorios de UPEX, sigue esta
             });
             ```
 
+        - Ejemplo TestBase en **WebdriverIO con Typescript:**
+            - *En WebdriverIO se crea literalmente el archivo TestBase.ts como Clase.*
+
+            ```typescript
+            import LoginPage from '@pages/LoginPage';
+            import HomePage from '@pages/HomePage';
+
+            class TestBase {
+                // Se instancian los PageObjects como propiedades de clase
+                get loginPage() { return LoginPage };
+                get homePage() { return HomePage };
+            }
+            export default new TestBase();
+            // ---- Uso en archivo de prueba ----:
+            import TestBase from '@TestBase';
+            test('test case name', async () => {
+                //...
+                await TestBase.loginPage.submitLogin();
+            });
+            ```
+
+    - Para Java: `/TestBase.java`
+        - Ejemplo TestBase en **Selenium con Java:**
+            - *En Selenium se crea literalmente el archivo TestBase.ts como Clase.*
+
+            ```java
+            package e2e.fixtures;
+            import java.util.function.Supplier;
+            import e2e.pages.LoginPage;
+            import e2e.pages.HomePage;
+
+            public class TestBase extends Page {
+                protected LoginPage loginPage;
+                protected HomePage homePage;
+                public TestBase() {
+                    // Instanciar los PageObjects en el constructor
+                    this.loginPage = new LoginPage(driver);
+                    this.homePage = new HomePage(driver);
+                }
+            }
+            // ---- Uso en archivo de prueba ----:
+            import e2e.fixtures.TestBase;
+            public class LoginTest extends TestBase {
+                @Test
+                public void login() {
+                    // ...
+                    this.loginPage.submitLogin();
+                }
+            }
+            ```
+
+    - Para Python: `/testbase.py`
+        - Ejemplo TestBase en **Selenium con Python:**
+
+            ```python
+            from page import Page
+            class TestBase(Page):
+            def __init__(self):
+                # Instanciar los PageObjects en el constructor
+                self.login_page = LoginPage(self.driver)
+                self.home_page = HomePage(self.driver)
+
+            # ---- Uso en archivo de prueba ----:
+            from testbase import TestBase
+            class TestLogin(TestBase):
+                def test_login(self):
+                    # ...
+                    self.login_page.submit_login()
+            ```
+
 > [!NOTE]
 > Este archivo se importa en cada archivo de prueba para acceder a todos los PageObjects (o funciones de utilidad) con mayor facilidad.
 > Además, la creación de cada TestBase para cada framework es diferente, por lo que se debe ajustar según el framework. En Playwright, por ejemplo, se usa la técnica Fixture para armar el TestBase. En Cypress, se usa el Commands.js como el TestBase. Y así sucesivamente.
 
+- **Técnica "TestPlan"**:
+    - Definición: *Es un archivo que contiene la estructura de las suites de pruebas (Sanity, Smoke, Regression) y los casos de prueba que se ejecutarán en cada suite.*
+    - Directorio: *Este archivo se puede ubicar en cualquier directorio específico, pero se recomienda en el directorio raíz de pruebas.*
+    - Modelo Base del TestPlan (Ejemplo para WebdriverIO):
+
+        ```typescript
+        // Primero se mapea cada path de test en una variable:
+        const loginTest = 'test/specs/login/login.e2e.ts';
+        const buyProductTest = 'test/specs/product/buyProduct.e2e.ts';
+        const checkoutTest = 'test/specs/checkout/checkout.e2e.ts';
+        const addCartTest = 'test/specs/cart/addCart.e2e.ts';
+        const searchProductTest = 'test/specs/product/searchProduct.e2e.ts';
+        // Luego se agrupan los paths en suites de pruebas:
+        export const TestPlan = {
+            smoke: [loginTest, buyProductTest, checkoutTest],
+            regression: [loginTest, buyProductTest, checkoutTest, addCartTest, searchProductTest],
+            sanityLogin: [loginTest],
+            sanityProduct: [buyProductTest],
+            sanityCheckout: [checkoutTest],
+            // ...
+        };
+        ```
+
+> [!NOTE]
+> Este archivo solo se importa en el archivo de Config de Pruebas correspondiente para ejecutar las suites de pruebas según la estrategia.
+
 #### > **Estructura: Archivos de Prueba (E2E o Integration):**
 
 - Nomenclatura de Sufijos de Pruebas para E2E o Integration:  
-    - para pruebas generales: `**test.{js,ts}` o `**spec.{js,ts}`
-    - para pruebas de E2E: `**e2e.test.{js,ts}` (JS/TS)
-    - para pruebas de Integration: `**api.test.{js,ts}` (JS/TS)
+    - para pruebas generales: `**test.{js,ts,java,py}` o `**spec.{js,ts,java,py}`
+    - para pruebas de E2E: `**e2e.test.{js,ts}` (JS/TS) o `**E2eTest.java` (Java) o `**e2e_test.py` (Python)
+    - para pruebas de Integration: `**api.test.{js,ts}` (JS/TS) o `**ApiTest.java` (Java) o `**api_test.py` (Python)
 
 - Path de Pruebas:
-    - **Playwright(TS)**: `test/specs/<component-name>/*.ts` (ejemplo: `test/specs/payment/payByDebit.test.ts`)
+    - Cypress(TS): `cypress/e2e/specs/<component-name>/*.ts` (ejemplo: `cypress/e2e/specs/payment/payByDebit.cy.ts`)
+    - Playwright(TS): `test/specs/<component-name>/*.ts` (ejemplo: `test/specs/payment/payByDebit.test.ts`)
+    - Selenium(Java): `src/test/java/e2e/specs/<component-name>/*.java` (ejemplo: `src/test/java/e2e/specs/payment/PayByDebit.java`)
+    - Selenium(Python): `test/specs/<component-name>/*.py` (ejemplo: `test/specs/payment/PayByDebit.java`)
 
 - Nomenclatura del Suite de Prueba (describe/class) debería ser:
     - `Jira Story ID` + `Story title`
@@ -486,22 +748,48 @@ Para mantener la consistencia y claridad en los repositorios de UPEX, sigue esta
 [github-actions]: https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white
 [github-actions-docu]: https://docs.github.com/en/actions
 <!-- Programming Languages -->
+[javascript-logo]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
+[javascript-site]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [typescript-logo]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
 [typescript-site]: https://www.typescriptlang.org/
+[java-logo]: https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white
+[java-site]: https://www.java.com/
+[python-logo]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
+[python-site]: https://www.python.org/
+[csharp-logo]: https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white
+[csharp-site]: https://docs.microsoft.com/en-us/dotnet/csharp/
 
 <!-- Testing Frameworks -->
 [playwright-logo]: https://img.shields.io/badge/playwright-black?style=for-the-badge
 [playwright-docu]: https://playwright.dev/docs/intro
+[cypress-logo]: https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e
+[cypress-docu]: https://docs.cypress.io/guides/getting-started/installing-cypress
+[selenium-logo]: https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white
+[selenium-docu]: https://www.selenium.dev/documentation/overview/
+[wdio-logo]: https://img.shields.io/badge/webdriverio-black?logo=webdriverio&style=for-the-badge
+[wdio-docu]: https://webdriver.io/docs/gettingstarted
+[k6-logo]: https://img.shields.io/badge/k6-black?logo=k6&style=for-the-badge
+[k6-docu]: https://grafana.com/docs/k6/latest/
 
 <!-- Package Managers -->
 [node-logo]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
 [node-site]: https://nodejs.org/
+[gradle]: https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white
+[gradle-docu]: https://gradle.org
+[Miniconda]: https://img.shields.io/badge/Miniconda-%2344A833.svg?style=for-the-badge&logo=anaconda&logoColor=white
+[conda-docu]: https://docs.conda.io/en/latest/
+[npm]: https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white
+[npm-docu]: https://docs.npmjs.com/
+[pnpm]: https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220
+[pnpm-docu]: https://pnpm.io/installation
 [yarn]: https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white
 [yarn-docu]: https://yarnpkg.com/cli
 
 <!-- Integrations -->
 [eslint]: https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white
 [eslint-site]: https://eslint.org/
+[grafana]: https://img.shields.io/badge/grafana-%23F46800.svg?style=for-the-badge&logo=grafana&logoColor=white
+[grafana-site]: https://grafana.com/
 [allure-docu]: https://allurereport.org/docs/
 [allure]: https://img.shields.io/badge/allure_report-black?style=for-the-badge
 
