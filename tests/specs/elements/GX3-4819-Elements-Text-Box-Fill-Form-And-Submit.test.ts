@@ -8,7 +8,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 		await page.goto('/text-box');
 	});
 
-	test('GX3-4820 | TC1: Validar ingresar datos en el formulario con todos los campos válidos.', async ({ page }) => {
+	test('4820 | TC1 Validar ingresar datos en el formulario con todos los campos válidos.', async ({ page }) => {
 		const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
@@ -50,7 +50,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			//console.log(values);
 		});
 	});
-	test('GX3-4820 | TC2: Validar ingresar datos válidos en el formulario dejando el campo "Full Name" vacío.', async ({ page }) => {
+	test('4820 | TC2 Validar ingresar datos válidos en el formulario dejando el campo “Full Name” vacío.', async ({ page }) => {
 		//const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
@@ -90,7 +90,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			expect(diplayedValues).toEqual(expectedValues);
 		});
 	});
-	test('GX3-4820 | TC3: Validar ingresar datos válidos en el formulario dejando el campo "Email" (sin "@").', async ({ page }) => {
+	test('4820 | TC3 Validar ingresar datos válidos en el formulario dejando el campo “Email” (sin “@”).', async ({ page }) => {
 		const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
@@ -129,7 +129,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			//console.log(values);
 		});
 	});
-	test('GX3-4820 | TC4: Validar ingresar datos válidos en el formulario dejando el campo “Current Address” vacío.', async ({ page }) => {
+	test('4820 | TC4 Validar ingresar datos válidos en el formulario dejando el campo “Current Address” vacío.', async ({ page }) => {
 		const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
@@ -171,7 +171,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			//console.log(values);
 		});
 	});
-	test('GX3-4820 | TC5: Validar ingresar datos válidos en el formulario dejando el campo “Email” sin (Dominio).(Extensión) y el “Current Address” vacío.', async ({ page }) => {
+	test('4820 | TC5 Validar ingresar datos válidos en el formulario dejando el campo “Email” sin (Dominio).(Extensión) y el “Current Address” vacío.', async ({ page }) => {
 		const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
@@ -213,7 +213,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			//console.log(values);
 		});
 	});
-	test('GX3-4820 | TC6: Validar ingresar datos válidos en el formulario con “Permanent Address” vacío.', async ({ page }) => {
+	test('4820 | TC6 Validar ingresar datos válidos en el formulario con “Permanent Address” vacío.', async ({ page }) => {
 		const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
@@ -255,7 +255,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			//console.log(values);
 		});
 	});
-	test('GX3-4820 | TC7: Validar ingresar datos válidos en el formulario con “Email” y “Permanent Address” vacíos.', async ({ page }) => {
+	test('4820 | TC7 Validar ingresar datos válidos en el formulario con “Email” y “Permanent Address” vacíos.', async ({ page }) => {
 		const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
@@ -297,7 +297,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', async () => {
 			//console.log(values);
 		});
 	});
-	test('GX3-4820 | TC8: Validar ingresar datos válidos en el formulario con “Current Address” y “Permanent Address” vacíos.', async ({ page }) => {
+	test('4820 | TC8 Validar ingresar datos válidos en el formulario con “Current Address” y “Permanent Address” vacíos.', async ({ page }) => {
 		const fullNameImput = page.locator('#userName-wrapper input');
 		const emailImput = page.locator('#userEmail-wrapper input');
 		const currentAddressImput = page.locator('#currentAddress-wrapper textarea');
