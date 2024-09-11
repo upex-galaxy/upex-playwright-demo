@@ -10,8 +10,8 @@ const overrides: PlaywrightTestConfig = {
 		['./tests/custom-reporter.ts'],
 		['html', { outputFolder: 'test-html-report/chrome', open: 'never' }],
 		['junit', { outputFolder: 'test-junit-report', outputFile: 'test-junit-report/chrome-importer-report.xml' }],
-		['allure-playwright'],
-	],
+		['allure-playwright']
+	]
 };
 
 const merged = _.merge(config, overrides);

@@ -14,7 +14,7 @@ export class SpaceProductPage extends ReactPage {
 	constructor(driver: Page) {
 		super(driver);
 		this.page = driver;
-		this.productCards = () => this.getByReactTool('card', this.page);
+		this.productCards = () => this.getByReactTool('card');
 		//* Estas son las propiedades de cada Card (puedes combinarlo con productCards()
 		this.destinyTitle = () => this.page.locator('h5'); //todo: combine with productCard
 		this.destinyByTitle = (destinyTitle: string) => this.page.locator('h5', { hasText: destinyTitle });
