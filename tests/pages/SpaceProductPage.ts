@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
-import type { ProductCardData } from '@type/spaceBeyongTypes';
+import type { ProductCardData } from '@type/spaceBeyondTypes';
 import { ReactPage } from './ReactPage';
 
 export class SpaceProductPage extends ReactPage {
