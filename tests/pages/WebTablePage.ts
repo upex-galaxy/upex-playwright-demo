@@ -3,9 +3,10 @@ import { expect } from '@playwright/test';
 
 export class WebTablesPage {
 	readonly page: Page;
-	readonly addButton: Locator;
-	readonly submitButton: Locator;
-	readonly cancelButton: Locator;
+	readonly openRegistrationFormButton: Locator;
+	readonly submitRegistrationFormButton: Locator;
+	readonly closeFormButton: Locator;
+	readonly editRecordFormButton: Locator;
 	readonly firstNameInput: Locator;
 	readonly lastNameInput: Locator;
 	readonly emailInput: Locator;
@@ -13,12 +14,12 @@ export class WebTablesPage {
 	readonly salaryInput: Locator;
 	readonly departmentInput: Locator;
 
-	// Incializacion de Selectores
 	constructor(page: Page) {
 		this.page = page;
-		this.addButton = page.locator('#addNewRecordButton');
-		this.submitButton = page.locator('#submit');
-		this.cancelButton = this.page.locator('body > div.fade.modal.show > div > div > div.modal-header > button > span:nth-child(1)');
+		this.openRegistrationFormButton = page.locator('#addNewRecordButton');
+		this.submitRegistrationFormButton = page.locator('#submit');
+		this.closeFormButton = this.page.getByRole('button', { name: 'Close' });
+		this.editRecordFormButton = page.locator('#edit-record-1 path');
 		this.firstNameInput = page.locator('#firstName');
 		this.lastNameInput = page.locator('#lastName');
 		this.emailInput = page.locator('#userEmail');
@@ -31,16 +32,15 @@ export class WebTablesPage {
 		await this.page.goto('https://demoqa.com/webtables');
 	}
 
-	async clickAddButton() {
-		await this.addButton.click();
+	async clickOpenRegistrationFormButton() {
+		await this.openRegistrationFormButton.click();
 	}
 
-	async clickCancelButton() {
-		await this.cancelButton.click();
+	async clickCloseFormButton() {
+		await this.closeFormButton.click();
 	}
 
-	// Ingresar datos en el formulario
-	async fillForm(record: { firstName: string; lastName: string; email: string; age: string; salary: string; department: string }) {
+	async fillRegistrationForm(record: { firstName: string; lastName: string; email: string; age: string; salary: string; department: string }) {
 		await this.firstNameInput.fill(record.firstName);
 		await this.lastNameInput.fill(record.lastName);
 		await this.emailInput.fill(record.email);
@@ -49,117 +49,115 @@ export class WebTablesPage {
 		await this.departmentInput.fill(record.department);
 	}
 
-	async clickSubmitButton() {
-		await this.submitButton.click();
+	async clickSubmitRegistrationFormButton() {
+		await this.submitRegistrationFormButton.click();
 	}
 
-	// Verificar un nuevo registro en el formulario
-	async verifyNewRecord(expectedName: string) {
-		const cellSelector = '#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-tbody > div:nth-child(4) > div > div:nth-child(1)';
-		const cell = this.page.locator(cellSelector);
-		await expect(cell).toHaveText(expectedName);
+	async clickEditButtonForRecord(rowNumber: number): Promise<void> {
+		const editButtonSelector = `#edit-record-${rowNumber} path`;
+		await this.page.locator(editButtonSelector).click();
 	}
 
-	// Verificar que un registro no esté presente en el formulario
-	async verifyRecordNotPresent(expectedName: string) {
-		const cellSelector = '#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-tbody';
-		const rows = this.page.locator(cellSelector).locator('div.rt-tr');
-		const texts = await rows.allInnerTexts();
-		expect(texts).not.toContain(expectedName);
-	}
-
-	// Editar un registro específico
-	async editRecord(rowNumber: number) {
-		const editButtonLocator = this.page.locator(`#edit-record-${rowNumber} > svg > path`);
-		await editButtonLocator.click();
-	}
-
-	// Ordenar la tabla por una columna
-	async sortByColumn(columnName: 'firstName' | 'lastName' | 'salary') {
+	async sortTableByColumnHeader(columnName: 'firstName' | 'lastName' | 'salary') {
 		const headerSelectors = {
-			firstName: '#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-thead > div.rt-tr > div:nth-child(1)',
-			lastName: '#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-thead > div.rt-tr > div:nth-child(2)',
-			salary: '#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-thead > div.rt-tr > div:nth-child(5)'
+			firstName: this.page.locator('.rt-resizable-header-content').nth(0),
+			lastName: this.page.locator('.rt-resizable-header-content').nth(1),
+			salary: this.page.locator('.rt-resizable-header-content').nth(2)
 		};
-
-		const headerLocator = this.page.locator(headerSelectors[columnName]);
+		const headerLocator = headerSelectors[columnName];
 		await headerLocator.click();
 	}
 
-	// Obtener los valores de una columna
-	async getColumnValues(columnNumber: number) {
-		const columnSelector = `#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-tbody > div > div:nth-child(${columnNumber})`;
-		const columnLocator = this.page.locator(columnSelector);
+	async getAllColumnValues(columnName: 'firstName' | 'lastName' | 'salary') {
+		const columnSelectors = {
+			firstName: this.page.locator('.rt-tr-group .rt-td').nth(0),
+			lastName: this.page.locator('.rt-tr-group .rt-td').nth(1),
+			salary: this.page.locator('.rt-tr-group .rt-td').nth(4)
+		};
+		const columnLocator = columnSelectors[columnName];
 		return await columnLocator.allTextContents();
 	}
 
-	// Verificar que una columna esté ordenada
-	async verifyColumnSorted(columnValues: string[], isNumeric: boolean = false) {
+	async verifyColumnValuesAreSorted(columnValues: string[], isNumeric: boolean = false) {
 		const sortedValues = [...columnValues].sort((a, b) => (isNumeric ? parseFloat(a) - parseFloat(b) : a.localeCompare(b)));
 		expect(columnValues).toEqual(sortedValues);
 	}
 
-	// Establecer el número de filas por página
-	async setRowsPerPage(value: string) {
-		const rowsPerPageSelector = this.page.locator('select[aria-label="rows per page"]');
+	async setRowsPerPageAndGetRowCount(value: string): Promise<number> {
+		const rowsPerPageSelector = this.page.getByLabel('rows per page');
 		await rowsPerPageSelector.selectOption({ value: value });
 		await this.page.waitForTimeout(1000);
-	}
-
-	// Obtener el conteo de filas visibles
-	async getRowCount() {
-		const rowCountLocator = this.page.locator('#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-tbody > div');
+		const rowCountLocator = this.page.locator('.ReactTable .rt-tbody .rt-tr-group');
 		return await rowCountLocator.count();
 	}
 
 	async clickNextButton() {
-		const nextButtonLocator = this.page.locator('#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.pagination-bottom > div > div.-next > button');
+		const nextButtonLocator = this.page.getByRole('button', { name: 'Next' });
 		await nextButtonLocator.click();
 		await this.page.waitForTimeout(1000);
 	}
 
 	async clickPreviousButton() {
-		const previousButtonLocator = this.page.locator('#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.pagination-bottom > div > div.-previous > button');
+		const previousButtonLocator = this.page.getByRole('button', { name: 'Previous' });
 		await previousButtonLocator.click();
 		await this.page.waitForTimeout(1000);
 	}
 
-	// paginacion
-	async goToPage(pageNumber: string) {
-		const pageNumberInput = this.page.locator('#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.pagination-bottom > div > div.-center > span.-pageInfo > div > input[type=number]');
+	async goToPageNumber(pageNumber: string) {
+		const pageNumberInput = this.page.getByLabel('jump to page');
 		await pageNumberInput.waitFor({ state: 'visible' });
-		await pageNumberInput.click();
 		await pageNumberInput.fill(pageNumber);
 		await pageNumberInput.press('Enter');
 		await this.page.waitForTimeout(1000);
 	}
 
-	// Agregar registros en una iteración
 	async addMultipleRecords(records: Array<{ firstName: string; lastName: string; email: string; age: string; salary: string; department: string }>) {
 		for (const record of records) {
-			await this.clickAddButton();
-			await this.fillForm(record);
-			await this.clickSubmitButton();
+			await this.clickOpenRegistrationFormButton();
+			await this.fillRegistrationForm(record);
+			await this.clickSubmitRegistrationFormButton();
 			await this.page.waitForTimeout(1000);
 		}
 	}
 
-	// Hacer clic  columna "First Name"
 	async clickFirstNameHeader() {
-		const firstNameHeaderLocator = this.page.locator('#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-thead > div.rt-tr > div:nth-child(1)');
+		const firstNameHeaderLocator = this.page.locator('.rt-resizable-header-content').nth(0);
 		await firstNameHeaderLocator.click();
 	}
 
-	// Obtén los nombres de la primera columna
-	async getNamesFromFirstColumn(): Promise<string[]> {
-		const nameColumnLocator = this.page.locator('#app > div > div > div > div.col-12.mt-4.col-md-6 > div.web-tables-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-tbody > div > div:nth-child(1)');
-		const names = await nameColumnLocator.allTextContents();
-		return names;
+	async getNameFromFourthRowFirstColumn(): Promise<string> {
+		const fourthRowFirstColumnLocator = this.page.locator('.rt-tbody .rt-tr-group').nth(3).locator('.rt-td').nth(0);
+		const name = await fourthRowFirstColumnLocator.textContent();
+		return name?.trim() || '';
 	}
 
-	// Verifica que los nombres están ordenados alfabéticamente
+	async verifyNewRecordInForm(firstName: string) {
+		const rows = this.page.locator('.rt-tr-group');
+		const found = await rows.evaluateAll((rows: HTMLElement[], firstName: string) => rows.some(row => row.textContent?.includes(firstName)), firstName);
+		expect(found).toBe(true);
+	}
+
+	async verifyRecordInTable(updatedFirstName: string) {
+		const recordRow = this.page.locator(`table tbody tr:has(td:has-text("${updatedFirstName}"))`);
+		await expect(recordRow).toBeVisible();
+		await expect(recordRow).toContainText([updatedFirstName, 'UpdatedLastName', '35', 'updated.email@example.com', '55000', 'HR']);
+	}
+
+	async verifyRecordNotPresent(firstName: string) {
+		const nameColumnLocator: Locator = this.page.locator('.rt-tr-group .rt-td').nth(0);
+		const allNames = await nameColumnLocator.allTextContents();
+		const isPresent = allNames.includes(firstName);
+		expect(isPresent).toBeFalsy();
+	}
+
 	async verifyNamesAreSortedAlphabetically(names: string[]): Promise<boolean> {
 		const sortedNames = [...names].sort();
-		return names.every((name, index) => name === sortedNames[index]);
+		return JSON.stringify(names) === JSON.stringify(sortedNames);
+	}
+
+	async getNamesFromFirstColumn(): Promise<string[]> {
+		const nameColumnLocator = this.page.locator('.rt-tr-group .rt-td').nth(0);
+		const names = await nameColumnLocator.allTextContents();
+		return names;
 	}
 }
