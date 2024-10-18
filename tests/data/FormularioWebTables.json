@@ -1,0 +1,12 @@
+{
+	"records": [
+		{
+			"firstName": "Pedro",
+			"lastName": "Pablo",
+			"email": "pedro@example.com",
+			"age": "30",
+			"salary": "50000",
+			"department": "Engineering"
+		}
+	]
+}
