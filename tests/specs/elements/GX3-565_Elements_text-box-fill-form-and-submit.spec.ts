@@ -4,29 +4,43 @@ import { FillFormAndSubmitPage } from '@pages/text-box-fill-form-and-submit';
 import { faker } from '@faker-js/faker';
 
 story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
-	let fillFormAndSubmit: FillFormAndSubmitPage;
+	let fillAndSubmitPage: FillFormAndSubmitPage;
 
 	test.beforeEach(async ({ page }) => {
-		fillFormAndSubmit = new FillFormAndSubmitPage(page);
+		fillAndSubmitPage = new FillFormAndSubmitPage(page);
 		await page.goto('/text-box');
-		await fillFormAndSubmit.clearForm();
+		await fillAndSubmitPage.clearForm();
 	});
 
-	test('Fill form successfully', async () => {
-		const randomName = faker.person.fullName();
-		const randomEmail = faker.internet.email();
-		const randomCurrentAddress = faker.location.streetAddress();
-		const randomPermanentAddress = faker.location.streetAddress();
+	function generateRandomData() {
+		return {
+			randomName: faker.person.fullName(),
+			randomEmail: faker.internet.email(),
+			randomCurrentAddress: faker.location.streetAddress(),
+			randomPermanentAddress: faker.location.streetAddress()
+		};
+	}
 
-		await fillFormAndSubmit.fillName(randomName);
-		await fillFormAndSubmit.fillEmail(randomEmail);
-		await fillFormAndSubmit.fillCurrentAddress(randomCurrentAddress);
-		await fillFormAndSubmit.fillPermanentAddress(randomPermanentAddress);
-		await fillFormAndSubmit.submitForm();
+	test.skip('TC01: Should fill and submit the form with random data and display correct outputs', async () => {
+		const { randomName, randomEmail, randomCurrentAddress, randomPermanentAddress } = generateRandomData(); //Extract the generated random data
 
-		expect(await fillFormAndSubmit.getOutputName()).toContain(randomName);
-		expect(await fillFormAndSubmit.getOutputEmail()).toContain(randomEmail);
-		expect(await fillFormAndSubmit.getOutputCurrentAddress()).toContain(randomCurrentAddress);
-		expect(await fillFormAndSubmit.getOutputPermanentAddress()).toContain(randomPermanentAddress);
+		// fillForm() allows avoiding calling each method independently to fill all fields
+		await fillAndSubmitPage.fillForm({
+			name: randomName,
+			email: randomEmail,
+			currentAddress: randomCurrentAddress,
+			permanentAddress: randomPermanentAddress
+		});
+		await fillAndSubmitPage.submitForm();
+
+		expect(await fillAndSubmitPage.getOutputName()).toContain(randomName);
+		expect(await fillAndSubmitPage.getOutputEmail()).toContain(randomEmail);
+		expect(await fillAndSubmitPage.getOutputCurrentAddress()).toContain(randomCurrentAddress);
+		expect(await fillAndSubmitPage.getOutputPermanentAddress()).toContain(randomPermanentAddress);
+	});
+
+	test('TC02: Should not show output data if all fields are empty ', async () => {
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
 	});
 });

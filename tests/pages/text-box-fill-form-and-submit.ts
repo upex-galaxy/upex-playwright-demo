@@ -7,6 +7,7 @@ export class FillFormAndSubmitPage {
 	currentAddressInput: () => Locator;
 	permanentAddressInput: () => Locator;
 	submitButton: () => Locator;
+	outputArea: () => Locator;
 	outputName: () => Locator;
 	outputEmail: () => Locator;
 	outputCurrentAddress: () => Locator;
@@ -19,6 +20,7 @@ export class FillFormAndSubmitPage {
 		this.currentAddressInput = () => this.page.locator('#currentAddress');
 		this.permanentAddressInput = () => this.page.locator('#permanentAddress');
 		this.submitButton = () => this.page.locator('#submit');
+		this.outputArea = () => this.page.locator('#output');
 		this.outputName = () => this.page.locator('p#name');
 		this.outputEmail = () => this.page.locator('p#email');
 		this.outputCurrentAddress = () => this.page.locator('p#currentAddress');
@@ -49,6 +51,15 @@ export class FillFormAndSubmitPage {
 
 	async submitForm() {
 		await this.submitButton().click();
+	}
+
+	/* fillForm() allows avoiding calling each method independently to fill all fields.
+	The parameter is An object, "?" means that is not required*/
+	async fillForm(data: { name?: string; email?: string; currentAddress?: string; permanentAddress?: string }) {
+		if (data.name) await this.fillName(data.name);
+		if (data.email) await this.fillEmail(data.email);
+		if (data.currentAddress) await this.fillCurrentAddress(data.currentAddress);
+		if (data.permanentAddress) await this.fillPermanentAddress(data.permanentAddress);
 	}
 
 	// Methods for checking output text
