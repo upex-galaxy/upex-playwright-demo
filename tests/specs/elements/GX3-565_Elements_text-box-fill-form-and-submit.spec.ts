@@ -1,24 +1,32 @@
 import { story } from '@pages/TestBase';
-import test from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { FillFormAndSubmitPage } from '@pages/text-box-fill-form-and-submit';
+import { faker } from '@faker-js/faker';
 
-story('Fill form successfully', () => {
-	let fillForm: FillFormAndSubmitPage;
+story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
+	let fillFormAndSubmit: FillFormAndSubmitPage;
 
 	test.beforeEach(async ({ page }) => {
-		fillForm = new FillFormAndSubmitPage(page);
-		await page.goto('https://demoqa.com/text-box');
-		await fillForm.clearForm();
+		fillFormAndSubmit = new FillFormAndSubmitPage(page);
+		await page.goto('/text-box');
+		await fillFormAndSubmit.clearForm();
 	});
 
 	test('Fill form successfully', async () => {
-		await fillForm.fillName('Ana Ortega');
-		await fillForm.fillEmail('ana.ortega@example.com');
-		await fillForm.fillCurrentAddress('123 Main St, Odessa');
-		await fillForm.fillPermanentAddress('456 Elm St, Odessa');
-		await fillForm.submitForm();
+		const randomName = faker.person.fullName();
+		const randomEmail = faker.internet.email();
+		const randomCurrentAddress = faker.location.streetAddress();
+		const randomPermanentAddress = faker.location.streetAddress();
 
-		// expect(fillForm.fillName).toHaveText('Ana Ortega');
-		// expect(fillForm.emailInput()).toHaveText('ana.ortega@example.com');
+		await fillFormAndSubmit.fillName(randomName);
+		await fillFormAndSubmit.fillEmail(randomEmail);
+		await fillFormAndSubmit.fillCurrentAddress(randomCurrentAddress);
+		await fillFormAndSubmit.fillPermanentAddress(randomPermanentAddress);
+		await fillFormAndSubmit.submitForm();
+
+		expect(await fillFormAndSubmit.getOutputName()).toContain(randomName);
+		expect(await fillFormAndSubmit.getOutputEmail()).toContain(randomEmail);
+		expect(await fillFormAndSubmit.getOutputCurrentAddress()).toContain(randomCurrentAddress);
+		expect(await fillFormAndSubmit.getOutputPermanentAddress()).toContain(randomPermanentAddress);
 	});
 });
