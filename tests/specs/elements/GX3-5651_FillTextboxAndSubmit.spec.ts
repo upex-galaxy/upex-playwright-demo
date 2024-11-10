@@ -2,6 +2,7 @@ import { story } from '@pages/TestBase';
 import { test, expect } from '@playwright/test';
 import { FillFormAndSubmitPage } from '@pages/GX3-5651_FillTextboxAndSubmitPage';
 import { faker } from '@faker-js/faker';
+import data from '@data/GX3-5651_FillTextBoxAndSubmit.json' assert { type: 'json' };
 
 story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	let fillAndSubmitPage: FillFormAndSubmitPage;
@@ -43,4 +44,18 @@ story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		await fillAndSubmitPage.submitForm();
 		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
 	});
+
+	test('TC03: Should NOT submit the form when the Email field does not contain “@”', async () => {
+		await fillAndSubmitPage.fillEmail(data.invalidEmails['notContain@']);
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
+		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
+	});
+
+	test.skip('TC04: Should NOT submit the form when the Email field does not contain (minimum) 1 alphanumeric character before “@”', () => {});
+	test.skip('TC05: Should NOT submit the form when the Email field does not contain (minimum) 1 alphanumeric character after “@”', () => {});
+	test.skip('TC06: Should NOT submit the form when the Email field does not contain “.” after 1 alphanumeric character after “@”', () => {});
+	test.skip('TC07: Should NOT submit the form when the Email field does not contain (minimum) 2 alphanumeric characters after “.”', () => {});
+	test.skip('TC08: Should NOT submit the form when the Email field contains whitespace in the Email address', () => {});
+	test.skip('TC09: Should NOT submit the form when the Email field contains additional special characters beyond "@" and "."', () => {});
 });

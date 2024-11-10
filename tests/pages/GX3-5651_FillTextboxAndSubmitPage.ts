@@ -12,6 +12,7 @@ export class FillFormAndSubmitPage {
 	outputEmail: () => Locator;
 	outputCurrentAddress: () => Locator;
 	outputPermanentAddress: () => Locator;
+	redBorderEmailField: () => Locator;
 
 	constructor(driver: Page) {
 		this.page = driver;
@@ -25,6 +26,7 @@ export class FillFormAndSubmitPage {
 		this.outputEmail = () => this.page.locator('p#email');
 		this.outputCurrentAddress = () => this.page.locator('p#currentAddress');
 		this.outputPermanentAddress = () => this.page.locator('p#permanentAddress');
+		this.redBorderEmailField = () => this.page.locator('#userEmail[class*=field-error]');
 	}
 	async clearForm() {
 		await this.fullNameInput().fill('');
