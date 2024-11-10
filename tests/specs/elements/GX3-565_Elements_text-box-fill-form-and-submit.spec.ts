@@ -39,7 +39,7 @@ story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		expect(await fillAndSubmitPage.getOutputPermanentAddress()).toContain(randomPermanentAddress);
 	});
 
-	test('TC02: Should not show output data if all fields are empty ', async () => {
+	test('TC02: Should not show output data if all fields are empty', async () => {
 		await fillAndSubmitPage.submitForm();
 		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
 	});
