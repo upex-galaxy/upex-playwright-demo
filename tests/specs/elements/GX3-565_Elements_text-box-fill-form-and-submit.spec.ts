@@ -21,7 +21,7 @@ story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		};
 	}
 
-	test.skip('TC01: Should fill and submit the form with random data and display correct outputs', async () => {
+	test.skip('TC01: Should fill and submit the form with valid data', async () => {
 		const { randomName, randomEmail, randomCurrentAddress, randomPermanentAddress } = generateRandomData(); //Extract the generated random data
 
 		// fillForm() allows avoiding calling each method independently to fill all fields
