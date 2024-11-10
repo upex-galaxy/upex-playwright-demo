@@ -34,6 +34,7 @@ story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		});
 		await fillAndSubmitPage.submitForm();
 
+		await expect(fillAndSubmitPage.outputArea()).toBeVisible();
 		expect(await fillAndSubmitPage.getOutputName()).toContain(randomName);
 		expect(await fillAndSubmitPage.getOutputEmail()).toContain(randomEmail);
 		expect(await fillAndSubmitPage.getOutputCurrentAddress()).toContain(randomCurrentAddress);
@@ -52,10 +53,41 @@ story('GX3-565 | ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
 	});
 
-	test.skip('TC04: Should NOT submit the form when the Email field does not contain (minimum) 1 alphanumeric character before “@”', () => {});
-	test.skip('TC05: Should NOT submit the form when the Email field does not contain (minimum) 1 alphanumeric character after “@”', () => {});
-	test.skip('TC06: Should NOT submit the form when the Email field does not contain “.” after 1 alphanumeric character after “@”', () => {});
-	test.skip('TC07: Should NOT submit the form when the Email field does not contain (minimum) 2 alphanumeric characters after “.”', () => {});
-	test.skip('TC08: Should NOT submit the form when the Email field contains whitespace in the Email address', () => {});
-	test.skip('TC09: Should NOT submit the form when the Email field contains additional special characters beyond "@" and "."', () => {});
+	test('TC04: Should NOT submit the form when the Email field does not contain (minimum) 1 alphanumeric character before @', async () => {
+		await fillAndSubmitPage.fillEmail(data.invalidEmails['notCharacterBefore@']);
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
+		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
+	});
+
+	test('TC05: Should NOT submit the form when the Email field does not contain (minimum) 1 alphanumeric character after @', async () => {
+		await fillAndSubmitPage.fillEmail(data.invalidEmails['notCharacterAfter@']);
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
+		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
+	});
+	test('TC06: Should NOT submit the form when the Email field does not contain “.” after 1 alphanumeric character after @', async () => {
+		await fillAndSubmitPage.fillEmail(data.invalidEmails['not.Point']);
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
+		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
+	});
+	test('TC07: Should NOT submit the form when the Email field does not contain (minimum) 2 alphanumeric characters after . the point', async () => {
+		await fillAndSubmitPage.fillEmail(data.invalidEmails['not2CharacterAfter.Point']);
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
+		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
+	});
+	test('TC08: Should NOT submit the form when the Email field contains whitespace in the Email address', async () => {
+		await fillAndSubmitPage.fillEmail(data.invalidEmails['containsWhitespace']);
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
+		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
+	});
+	test('TC09: Should NOT submit the form when the Email field contains additional special characters beyond @ and . the point', async () => {
+		await fillAndSubmitPage.fillEmail(data.invalidEmails['additionalSpecialCharacters']);
+		await fillAndSubmitPage.submitForm();
+		await expect(fillAndSubmitPage.outputArea()).toBeHidden();
+		await expect(fillAndSubmitPage.redBorderEmailField()).toBeVisible();
+	});
 });

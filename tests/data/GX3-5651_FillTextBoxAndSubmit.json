@@ -6,6 +6,6 @@
 		"not.Point": "ana@gmailcom",
 		"not2CharacterAfter.Point": "ana123@g.",
 		"containsWhitespace": "ana @gmail.com",
-		"additionalSpecialCharacters": "a@@hh.hh"
+		"additionalSpecialCharacters": "a@@yahoo.com"
 	}
 }
