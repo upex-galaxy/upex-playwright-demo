@@ -1,0 +1,29 @@
+{
+	"invalidEmails": {
+		"notContain@": "agmail.cu",
+		"notCharacterBefore@": "@g.cu",
+		"notCharacterAfter@": "a@.com",
+		"not.Point": "ana@gmailcom",
+		"not2CharacterAfter.Point": "ana123@g.",
+		"containsWhitespace": "ana @gmail.com",
+		"additionalSpecialCharacters": "a@@yahoo.com"
+	},
+	"name": {
+		"nameTC05-Alphanumeric-Space": "xxxxxxx 123",
+		"nameTC06-Space-Point": "Adriana P.",
+		"nameTC07-1character": "A",
+		"nameTC08-SpecialCharacters": "Z'e-us",
+		"nameTC09-lowercase": "ana ortega"
+	},
+	"currentAddress": {
+		"currentAddressTC06-SpecialCharacters-Spaces": "#203 Calle 12, e/ B y C",
+		"currentAddressTC07-extraSpaces": "    Pepe    Z",
+		"currentAddressTC08-Points": "……",
+		"currentAddressTC09-SpecialCharacters": "*/"
+	},
+	"permanentAddress": {
+		"permanentAddressTC05-SpecialCharacters-Spaces": "#904 Calle F, e/ 17 y 21",
+		"permanentAddressTC07-capitalLetters": "ASDFG",
+		"permanentAddressTC08-SpecialCharacters": "!@#$%^&*()_"
+	}
+}
