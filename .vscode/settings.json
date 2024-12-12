@@ -150,12 +150,19 @@
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"terminal.integrated.tabs.defaultColor": "terminal.ansiGreen",
 	"terminal.integrated.tabs.defaultIcon": "source-control",
+<<<<<<< HEAD
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"workbench.colorTheme": "Andromeda",
+	"workbench.iconTheme": "helium-icon-theme",
+=======
 	"terminal.integrated.enablePersistentSessions": true,
 	// =====================
 	//? Workbench Settings
 	// =====================
 	"workbench.colorTheme": "Winter is Coming (Dark Blue)",
 	"workbench.iconTheme": "material-icon-theme",
+>>>>>>> aa3dabb71fb625341b840f4abbfca930db46eda8
 	"workbench.settings.editor": "json",
 	"workbench.tree.enableStickyScroll": true,
 	"files.watcherExclude": {
